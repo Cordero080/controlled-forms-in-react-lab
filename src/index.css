@@ -1,119 +1,154 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* -------------------
+   INDEX.CSS - Add/Update these styles
+   ------------------- */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Importing Fonts */
+@font-face {
+  font-family: 'Orbitron';
+  src: url('/fonts/Orbitron.ttf') format('truetype');
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+/* Applying global styles */
 body {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-width: 100vw;
-  min-height: 100vh;
+  font-family: 'Orbitron', sans-serif;
 }
 
+/* Main Title Styling - Subtle and elegant */
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-family: 'Orbitron', 'Rajdhani', 'Arial', sans-serif;
+  font-size: clamp(2rem, 2.5vw, 2.8rem);
+  font-weight: 100;
+  color: rgba(93, 213, 226, 0.85);
+  text-align: center;
+  letter-spacing: 0.25em;
+  margin: 1.5vw auto 2.5vw;
+  padding: 0 2vw;
+  text-transform: uppercase;
+  text-shadow: 
+    0 0 10px rgba(93, 180, 166, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* "MY" span styling */
+.my-above {
+  
+  display: block;
+  font-size: 0.45em;
+  margin-bottom: 0.3em;
+  letter-spacing: 0.4em;
+  color: rgba(167, 111, 194, 0.7);
+  font-weight: 400;
+  text-shadow: 
+    0 0 8px rgba(167, 111, 194, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* Form elements */
 form {
+  
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 100%;
+  align-items: stretch;
+  gap: 1.2vw;
+  position: relative;
+  z-index: 2;
+}
+
+label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  font-weight: 600;
+  align-self: flex-start;
+  width: 100%;
+  margin-top: 0.5vw;
+  margin-bottom: 0.2vw;
+  color: rgba(93, 180, 166, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 5px rgba(93, 180, 166, 0.2);
+  transition: all 0.3s;
 }
 
 input {
-  padding: 5px;
+  font-family: 'Dune Rise', sans-serif;
+  border-radius: 6px;
+  background: rgba(15, 25, 45, 0.4);
+  border: 1px solid rgba(93, 180, 166, 0.25);
+  padding: 0.8vw 1.2vw;
+  width: 100%;
+  font-family: 'Georgia', serif;
+  font-size: clamp(0.9rem, 1.4vw, 1rem);
+  color: rgba(232, 244, 248, 0.9);
+  box-shadow: 
+    inset 0 1px 3px rgba(0, 0, 0, 0.3),
+    0 0 0 rgba(93, 180, 166, 0);
+  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
+  box-sizing: border-box;
 }
 
-.bookshelfDiv {
-  padding: 10px;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+input::placeholder {
+  font-family: 'Dune Rise', sans-serif;
+  color: rgba(168, 213, 226, 0.3);
+  font-style: italic;
 }
 
-.formDiv {
-  width: 60%;
-  border: 1px solid white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+input:focus {
+  outline: none;
+  background: rgba(20, 35, 60, 0.5);
+  border-color: rgba(93, 180, 166, 0.5);
+  box-shadow: 
+    inset 0 1px 3px rgba(0, 0, 0, 0.4),
+    0 0 8px rgba(93, 180, 166, 0.15);
 }
 
-.bookCardsDiv {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 90%;
-  margin-top: 20px;
+input:hover:not(:focus) {
+  border-color: rgba(93, 180, 166, 0.35);
 }
 
-.bookCard {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border: 1px solid white;
-  padding: 5px;
-  width: 40%;
-  margin: 15px 10px;
-  background-color: rgb(155, 155, 155);
-  color: black;
+/* Button styling - subtle and elegant */
+button {
+  font-family: 'Dune Rise', sans-serif;
+  position: relative;
+  border-radius: 6px;
+  border: 1px solid rgba(93, 180, 166, 0.4);
+  padding: 0.8vw 2vw;
+  margin-top: 0.8vw;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  background: rgba(93, 180, 166, 0.1);
+  color: rgba(93, 213, 226, 0.9);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  text-shadow: 0 0 5px rgba(93, 180, 166, 0.3);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button:hover {
+  border-color: rgba(93, 180, 166, 0.6);
+  background: rgba(93, 180, 166, 0.15);
+  box-shadow: 
+    0 4px 12px rgba(93, 180, 166, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+  color: rgba(93, 213, 226, 1);
+  text-shadow: 0 0 8px rgba(93, 180, 166, 0.5);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:focus,
+button:focus-visible {
+  outline: none;
+  box-shadow: 
+    0 0 0 2px rgba(93, 180, 166, 0.2),
+    0 4px 12px rgba(93, 180, 166, 0.15);
 }

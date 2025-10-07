@@ -1,42 +1,236 @@
-#root {
-  max-width: 1280px;
+@font-face {
+  font-family: 'Neuropol';
+  src: url('/fonts/Neuropol.ttf') format('truetype');
+}
+
+
+
+
+/* APP.CSS - Add these styles
+   ------------------- */
+
+/* Wrapper to center everything */
+.title {
+  font-family: 'Orbitron', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 100vh;
+  padding: 2vw 0;
+}
+
+/* Main container - centered and clean */
+.bookshelfContainer {
+  position: static; /* Allow child elements to move freely */
+  width: 90%;
+  max-width: 650px;
   margin: 0 auto;
-  padding: 2rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+  align-items: center;
+}
+
+/* Book cards container - subtle glass effect */
+.bookshelfDiv {
+  
+  position: relative; /* Ensure it respects parent boundaries */
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+  width: 120%; /* Increased the width of the div */
+  transform: translateX(-8%); /* Shift the div slightly to the left */
+  padding: 1.5vw 2vw;
+  background: rgba(15, 30, 55, 0.25);
+  border-radius: 12px;
+  border: 1px solid rgba(93, 180, 166, 0.15);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px) saturate(1.1);
+  transition: all 0.4s ease;
+}
+
+.bookshelfDiv:hover {
+  background: rgba(43, 94, 182, 0.3);
+  border-color: rgba(93, 180, 166, 0.25);
+  box-shadow: 
+    0 6px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Individual Book Card - minimal and readable */
+.bookCard {
+  font-family: 'Orbitron', sans-serif;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.2vw 1.5vw;
+  background: rgba(20, 35, 60, 0.4);
+  border-radius: 6px;
+  border-left: 2px solid rgba(93, 180, 166, 0.3);
+  border-right: 1px solid rgba(93, 180, 166, 0.1);
+  border-top: 1px solid rgba(93, 180, 166, 0.1);
+  border-bottom: 1px solid rgba(93, 180, 166, 0.1);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.bookCard:hover {
+  background: rgba(25, 45, 75, 0.5);
+  border-left-color: rgba(93, 180, 166, 0.6);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.25),
+    -2px 0 8px rgba(93, 180, 166, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transform: translateX(4px);
+}
+
+/* Book Card Title - clean and readable */
+.bookCard h3 {
+ font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  
+  color: rgba(93, 213, 226, 0.95);
+  margin: 0 0 0.4vw 0;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s;
+  line-height: 1.4;
+  text-align: left;
+  width: 100%;
+}
+
+.bookCard:hover h3 {
+  color: rgb(5, 188, 208);
+  text-shadow: 
+    0 0 8px rgba(93, 180, 166, 0.3),
+    0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Book Card Author - subtle and elegant */
+.bookCard p {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  font-style: italic;
+  color: rgba(168, 213, 226, 0.75);
+  margin: 0;
+  letter-spacing: 0.01em;
+  transition: all 0.3s;
+  line-height: 1.5;
+  text-align: left;
+  width: 100%;
+}
+
+.bookCard:hover p {
+  font-family: 'Orbitron', sans-serif;
+  color: rgba(235, 226, 128, 0.9);
+}
+
+/* Form container - subtle glass effect */
+.formDiv {
+  
+  position: relative;
+  width: 100%;
+  padding: 2vw 2.5vw;
+  background: rgba(15, 30, 55, 0.3);
+  border-radius: 12px;
+  border: 1px solid rgba(93, 180, 166, 0.2);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px) saturate(1.1);
+  z-index: 2;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.formDiv:hover {
+  background: rgba(15, 30, 55, 0.35);
+  border-color: rgba(93, 180, 166, 0.3);
+  box-shadow: 
+    0 6px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.formDiv form {
+  margin-top: 10px;
+}
+
+/* Form heading */
+.formDiv h3.add-book {
+  
+  font-family: 'Dune_rise', sans-serif;
+  font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+  letter-spacing: 0.08em;
+  margin: 0 0 1.5vw 0;
+  color: rgba(93, 213, 226, 0.9);
+  text-shadow: 0 0 8px rgba(93, 180, 166, 0.3);
+  text-transform: uppercase;
+  font-weight: 700;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Expand Button - centered and block display */
+.expandButton {
+  display: block; /* Ensure the button is treated as a block element */
+  margin: 0 auto; /* Center the button horizontally */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .bookshelfContainer {
+    width: 95%;
+    gap: 3vw;
   }
-  to {
-    transform: rotate(360deg);
+
+  .bookCard {
+    
+    padding: 2.5vw 3vw;
+  }
+  
+  .bookshelfDiv {
+    padding: 2.5vw 2vw;
+    gap: 1.5vw;
+    margin-left: -20%; /* Adjust for smaller screens */
+  }
+  
+  .formDiv {
+    padding: 3.5vw 4vw;
+  }
+  
+  label {
+    
+    font-size: 0.9rem;
+    margin-top: 1vw;
+  }
+  
+  input {
+    padding: 2.5vw 3vw;
+  }
+  
+  button {
+    
+    padding: 2.5vw 5vw;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }

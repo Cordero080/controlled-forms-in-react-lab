@@ -1,10 +1,20 @@
-import './index.css';
+import './App.css';
+import './components/GeometricBg/GeometricBg.css';
+import React from 'react';
+import Bookshelf from './components/Bookshelf';
+import GeometricBg from './components/GeometricBg/GeometricBg.jsx';
 
-import { useState } from 'react'
- const App = () => {
 
-  return <h1>Hello world!</h1>
-
- };
+const App = () => {
+   return (
+      <>
+            <GeometricBg />
+            <div className="title"style={{ position: 'relative', zIndex: 2 }}>
+               <h1>MY BOOKSHELF</h1>
+               <Bookshelf />
+            </div>
+      </>
+   );
+};
 
  export default App;
