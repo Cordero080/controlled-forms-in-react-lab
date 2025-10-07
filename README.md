@@ -23,17 +23,17 @@ This project demonstrates React fundamentals by building a bookshelf manager whe
 
 ### Main Interface
 
-![Bookshelf View](./bookshelf-view.png)
+![Bookshelf View](./screenshots/bookshelf-view.png)
 _The main bookshelf displaying book cards with the animated background_
 
 ### Homepage Collapsed View
 
-![Bookshelf View](./home-page.png)
+![Bookshelf View](./screenshots/home-page.png)
 _The main bookshelf displaying book cards with the animated background_
 
 ### Add Book Form
 
-![Form Interface](./add-book-form.png)
+![Form Interface](./screenshots/add-book-form.png)
 _Collapsible form for adding new books to the collection_
 
 ### Expanded View
@@ -44,6 +44,7 @@ _Expanded grid view with larger book cards_
 ### Hover Interaction
 
 ![Hover Effect](./screenshots/hover-effect.png)
+_(Will add link reference soon)_
 _Book card hover state with scale and glow effects_
 
 ---
@@ -230,6 +231,17 @@ npm run dev
 - [ ] Sort by title or author
 - [ ] Book cover images
 - [ ] Reading status tracking
+
+---
+
+## 🌟 Stretch Goals
+
+- **Preview Mode Enhancements**: Limit visible books (6–8) before expansion for cleaner presentation.
+- **Responsive Grid Layout**: Implement flexible CSS Grid that adapts to different screen sizes.
+- **Search & Sort Tools**: Add client-side filtering and sorting by title, author, or date added.
+- **Text Overflow Control**: Clamp long titles to two lines for a balanced, readable layout.
+- **Display Density Toggle**: Allow users to switch between compact and comfortable card spacing.
+- **Performance Optimization**: Integrate virtualization (via react-window) for smooth scrolling with large collections.
 
 ---
 
