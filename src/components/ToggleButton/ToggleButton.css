@@ -1,0 +1,22 @@
+.toggleButton {
+  font-family: 'Dune_rise', sans-serif;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  
+  border: none;
+  font-size: 1.3rem;
+  font-weight: 900;
+  
+  padding: 15px;
+  
+}
+
+.toggleButton:hover {
+  text-shadow: 0 0 15px rgba(119, 246, 246, 0.72), 0 0 30px rgba(14, 147, 214, 0.035);
+  transform: scale(1.05);
+}
+
+.toggleButton:focus {
+  outline: 2px solid rgba(25, 211, 180, 0.191);
+  outline-offset: 2px;
+}

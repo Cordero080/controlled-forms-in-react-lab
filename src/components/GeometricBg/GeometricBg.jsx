@@ -1,49 +1,123 @@
-// GeometricBg.jsx
-// This component creates a dynamic, animated SVG background using React state and effects.
-// It demonstrates advanced animation, mathematical harmony, and playful React patterns.
+// ==================== IMPORTS ====================
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
-import React, { useState, useEffect, useMemo } from 'react';
-
+// ==================== COMPONENT DEFINITION ====================
 // The GeometricBg component is like the stage for a light show, where all the magic happens.
 const GeometricBg = () => {
+// ==================== STATE MANAGEMENT ====================
   // useState is like a notebook where React remembers things for you.
-  // 'dimensions' keeps track of the SVG canvas size. You can adjust these for different screen sizes.
+  // 'dimensions' keeps track of the SVG canvas size. I can adjust these for different screen sizes.
   const [dimensions, setDimensions] = useState({ width: 120, height: 80 });
   // 'time' is the clock for our animation. Changing its speed changes how fast everything moves.
   const [time, setTime] = useState(0);
+  // Check for reduced motion preference for accessibility
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   
-  // useEffect is like setting up a timer and a resize sensor. It runs after the component mounts.
+// ==================== ANIMATION SETUP ====================
+  // useEffect is like setting up a timer and a resize sensor. It runs after the component mounts. It's like a snitch that tells React something changed and you need to update the state of the component, the component being GeometricBg in this case.
   useEffect(() => {
-    // This function updates the canvas size. You can tweak width/height for different effects.
+    // Check for reduced motion preference
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+    
+    const handleMotionPreferenceChange = (e) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handleMotionPreferenceChange);
+    
+    // This function updates the canvas size.Tweak width/height for different effects.
     const updateDimensions = () => {
       setDimensions({
         width: 120, // Visual control: change for wider/narrower background
-        height: 80  // Visual control: change for taller/shorter background
+        height: 60  // Visual control: change for taller/shorter background
       });
     };
     
     updateDimensions();
     window.addEventListener('resize', updateDimensions);
     
-    // This interval is the heartbeat of the animation. Lower the interval for faster movement.
-    const interval = setInterval(() => {
-      setTime(t => t + .008); // Animation speed control: increase for faster, decrease for slower
-    }, 30); // Animation speed control: lower ms for smoother/faster animation
+    // Only start animation if user doesn't prefer reduced motion
+    let interval;
+    if (!prefersReducedMotion) {
+      // This interval is the heartbeat of the animation. Lower the interval for faster movement.
+      interval = setInterval(() => {
+        setTime(t => t + TIMING.TIME_INCREMENT); // Animation speed control: increase for faster, decrease for slower
+      }, TIMING.ANIMATION_INTERVAL); // Animation speed control: lower ms for smoother/faster animation
+    }
     
     return () => {
       window.removeEventListener('resize', updateDimensions);
-      clearInterval(interval);
+      mediaQuery.removeEventListener('change', handleMotionPreferenceChange);
+      if (interval) clearInterval(interval);
     };
-  }, []);
+  }, [prefersReducedMotion]);
   
+// ==================== CONSTANTS & CONFIGURATION ====================
   // Destructure width and height for easy use.
   const { width, height } = dimensions;
-  // The golden ratio, phi, is used for harmonious spacing. It's like nature's secret recipe for beauty.
+  // ===========THE GOLDEN RATIO OF PHI==============used for harmonious spacing. Nature's secret recipe for beauty/symmetry.
+  // Here we will use it to position key elements in the design and only go up to 60% of the width/height of the canvas to keep things balanced.
   const phi = 1.618033988749;
+  
+  // Animation phase constants for better maintainability
+  const ANIMATION_PHASES = {
+    FORMATION: 0.3,
+    STABLE: 0.6,
+    DISPERSION: 0.75,
+    CHAOS: 1.0
+  };
+  
+  // Opacity and timing constants
+  const OPACITY_LEVELS = {
+    FORMATION_START: 0.4,
+    FORMATION_RANGE: 0.5,
+    STABLE: 0.3,
+    DISPERSION_MULTIPLIER: 0.8,
+    CHAOS_BASE: 0.3,
+    CHAOS_RANGE: 0.3
+  };
+  
+  // Animation timing constants
+  const TIMING = {
+    ANIMATION_INTERVAL: 30,
+    TIME_INCREMENT: 0.008,
+    PULSE_FREQUENCY: 0.8,
+    ROTATION_SPEED: 3.2
+  };
+  
+  // Vanishing points for geometric curves - positioned using golden ratio for harmonious composition
+  const vps = [
+    { x: width / phi, y: height / phi, weight: 'high', energy: 'cerebral' },
+    { x: width - width / phi, y: height - height / phi, weight: 'high', energy: 'emotion' },
+    { x: width / phi, y: height - height / phi, weight: 'medium', energy: 'structure' },
+    { x: width - width / phi, y: height / phi, weight: 'medium', energy: 'dynamic' },
+  ];
+  
+  // Color palettes organized by energy type for thematic consistency
+  const colorPalettes = {
+    cerebral: ['#2E5B88', '#066bc3ff', '#6B9DC6'],
+    emotion: ['#8B4FA8', '#A76FC2', '#C391DB'],
+    structure: ['#3D9A8C', '#5DB4A6', '#7FCEC1'],
+    dynamic: ['#C05299', '#D47AB5', '#f3f30bff'],
+  };
+  
+  // Helper function to get colors from palettes with variant cycling
+  const getColor = useCallback((energy, variant = 0) => {
+    return colorPalettes[energy][variant % colorPalettes[energy].length];
+  }, []);
+  
+  // Helper function to get letter color based on sequence index
+  const getLetterColor = useCallback((seqIndex) => {
+    const colorMap = {
+      0: '#bfc22b87',
+      1: '#A76FC2', 
+      2: '#5DB4A6',
+      3: '#049cd3e8'
+    };
+    return colorMap[seqIndex % 4] || '#E8A0CF';
+  }, []);
   
   // wordSequences is a memoized array of word groups. Memoization is like keeping a cheat sheet for React so it doesn't recalculate unnecessarily.
   const wordSequences = useMemo(() => [
-    ['quiet', 'storm', 'calm'], 
+    ['quiet', 'storm', 'escalofrío'], 
     ['lost', 'found'], 
     ['龙', '詩','物','理'],
     ['time', 'EMBODY', 'flow'],
@@ -52,17 +126,18 @@ const GeometricBg = () => {
     ['hypnagogia', 'threshold', 'sub-conscious'],
     ['light', 'shadow', 'dusk', 'night'],
     ['space', 'void', 'peace', 'equanimity'], 
-    ['close', 'dispersion', 'chaos'], 
-    ['fade', 'emerge', 'made', 'pneuma'],
-    ['pages', 'verse', 'sage'], 
+    ['CATALINA', 'dispersion', 'chaos'], 
+    ['fade', 'emerge', 'Clara','made', 'pneuma'],
+    ['pages', 'verses', 'sage'], 
     ['voice', 'whisper','susurro', 'choice', 'pensamiento'], 
-    ['flow', 'swirl', 'glow'],
-    ['world', 'cosmos', 'infinite'], 
+    ['flow', 'osmosis', 'glow'],
+    ['world', 'cosmos', 'infinite', 'infinitum'], 
     ['dance', 'spiral', 'trance'], 
     ['story', 'myth', 'glory', 'legend'],
     ['breathe', 'release', 'believe'], 
     ['wander', 'wonder', 'wu-wei'], 
-    ['begin', 'end', 'again']
+    ['begin', 'end', 'again'],
+    ['Idividuation','respira','despierta','sueña','revela']
   ], []);
   
   // MORE DRAMATIC size variations per word sequence
@@ -70,10 +145,11 @@ const GeometricBg = () => {
     return wordSequences.map(() => ({
       fontSize: 0.8 + Math.random() * 3, // BIGGER RANGE: 0.8 to 3.8
       letterSpacing: 1.5 + Math.random() * 3.5, // 1.5 to 5
-      speedMultiplier: 0.6 + Math.random() * 0.8 // VARIED SPEED: 0.6x to 1.4x
+      speedMultiplier: 0.4 + Math.random() * 0.8 // VARIED SPEED: 0.6x to 1.4x
     }));
   }, [wordSequences]);
   
+// ==================== ANIMATION LOGIC ====================
   // The getLetterStates function calculates the position, opacity, and other properties of each letter.
   // This is the heart of the animation logic, where each letter becomes a 'particle' with its own behavior.
   // It loops through each word sequence and each letter, calculating how it should move, fade, and change.
@@ -129,9 +205,9 @@ const GeometricBg = () => {
         // 2. Stable (letters sit in place)
         // 3. Dispersion (letters scatter)
         // 4. Chaos/transition (letters morph to next word)
-        if (wordPhase < .3) { // Formation phase
+        if (wordPhase < ANIMATION_PHASES.FORMATION) { // Formation phase
           // Letters fly in from a spiral path
-          const progress = wordPhase / 0.3;
+          const progress = wordPhase / ANIMATION_PHASES.FORMATION;
           const eased = 1 - Math.pow(1 - progress, 3); // Ease-in for smoothness
           const targetX = centerX + driftX + (letterIndex * letterSpacing - currentWordWidth);
           const targetY = centerY + driftY;
@@ -140,17 +216,17 @@ const GeometricBg = () => {
           const startY = targetY + Math.sin(startAngle) * 50 * (1 - eased);
           x = startX;
           y = startY;
-          opacity = 0.9 + eased * 0.6; // Fade in
+          opacity = OPACITY_LEVELS.FORMATION_START + eased * OPACITY_LEVELS.FORMATION_RANGE; // Fade in more subtly
           char = currentChar;
-        } else if (wordPhase < 0.6) { // Stable phase
+        } else if (wordPhase < ANIMATION_PHASES.STABLE) { // Stable phase
           // Letters sit in place, fully visible
           x = centerX + driftX + (letterIndex * letterSpacing - currentWordWidth);
           y = centerY + driftY;
-          opacity = 9.8; // Fully visible
+          opacity = OPACITY_LEVELS.STABLE; // Fully visible but not overpowering
           char = currentChar;
-        } else if (wordPhase < .75) { // Dispersion phase
+        } else if (wordPhase < ANIMATION_PHASES.DISPERSION) { // Dispersion phase
           // Letters scatter outward
-          const progress = (wordPhase - 0.6) / 0.15;
+          const progress = (wordPhase - ANIMATION_PHASES.STABLE) / (ANIMATION_PHASES.DISPERSION - ANIMATION_PHASES.STABLE);
           const eased = Math.pow(progress, 2); // Ease-out for smoothness
           const startX = centerX + driftX + (letterIndex * letterSpacing - currentWordWidth);
           const startY = centerY + driftY;
@@ -158,11 +234,11 @@ const GeometricBg = () => {
           const disperseRadius = 12 * eased;
           x = startX + Math.cos(disperseAngle) * disperseRadius;
           y = startY + Math.sin(disperseAngle) * disperseRadius;
-          opacity = 0.8 * (1 - eased); // Fade out
+          opacity = OPACITY_LEVELS.DISPERSION_MULTIPLIER * (1 - eased); // Fade out
           char = currentChar;
         } else {
           // Chaos/transition phase: letters morph to next word
-          const progress = (wordPhase - 0.75) / 0.25;
+          const progress = (wordPhase - ANIMATION_PHASES.DISPERSION) / (ANIMATION_PHASES.CHAOS - ANIMATION_PHASES.DISPERSION);
           const midProgress = Math.sin(progress * Math.PI);
           if (progress < .5) {
             // Letters swirl in chaos
@@ -170,7 +246,7 @@ const GeometricBg = () => {
             const chaosY = centerY + driftY + Math.cos(time * 0.3 + letterIndex + seqIndex) * 8;
             x = chaosX;
             y = chaosY;
-            opacity = 0.3 + midProgress * 0.3;
+            opacity = OPACITY_LEVELS.CHAOS_BASE + midProgress * OPACITY_LEVELS.CHAOS_RANGE;
             char = currentChar;
           } else {
             // Morph to next word
@@ -178,7 +254,7 @@ const GeometricBg = () => {
             const chaosY = centerY + driftY + Math.cos(time * 0.3 + letterIndex + seqIndex) * 8;
             x = chaosX;
             y = chaosY;
-            opacity = 0.3 + midProgress * 0.3;
+            opacity = OPACITY_LEVELS.CHAOS_BASE + midProgress * OPACITY_LEVELS.CHAOS_RANGE;
             char = nextChar;
           }
         }
@@ -193,10 +269,7 @@ const GeometricBg = () => {
             letterIndex,
             wordPhase,
             fontSize: letterFontSize,
-            color: seqIndex % 4 === 0 ? '#bfc22b87' : 
-            seqIndex % 4 === 3 ? '#049cd3e8' :
-                   seqIndex % 4 === 1 ? '#A76FC2' : 
-                   seqIndex % 4 === 2 ? '#5DB4A6' : '#E8A0CF'
+            color: getLetterColor(seqIndex)
           });
         }
       }
@@ -205,28 +278,16 @@ const GeometricBg = () => {
     return particles;
   };
   
-  const letterParticles = getLetterStates();
+  // Memoize expensive letter state calculations to prevent unnecessary re-computations
+  const letterParticles = useMemo(() => getLetterStates(), [time, wordSequences, sequenceSizes, width, height]);
   
-  const vps = [
-    { x: width / phi, y: height / phi, weight: 'high', energy: 'cerebral' },
-    { x: width - width / phi, y: height - height / phi, weight: 'high', energy: 'emotion' },
-    { x: width / phi, y: height - height / phi, weight: 'medium', energy: 'structure' },
-    { x: width - width / phi, y: height / phi, weight: 'medium', energy: 'dynamic' },
-  ];
+// ==================== COLOR PALETTES & STYLING ====================
+// Color constants have been moved to CONSTANTS & CONFIGURATION section above
   
-  const colorPalettes = {
-    cerebral: ['#2E5B88', '#066bc3ff', '#6B9DC6'],
-    emotion: ['#8B4FA8', '#A76FC2', '#C391DB'],
-    structure: ['#3D9A8C', '#5DB4A6', '#7FCEC1'],
-    dynamic: ['#C05299', '#D47AB5', '#f3f30bff'],
-  };
-  
-  const getColor = (energy, variant = 0) => {
-    return colorPalettes[energy][variant % colorPalettes[energy].length];
-  };
-  
+// ==================== SVG ELEMENT CONSTRUCTION ====================
   const elements = [];
   
+  // --- SVG Definitions (Gradients & Filters) ---
   elements.push(
     <defs key="defs">
       <linearGradient id="bgGradient" x1="10%" y1="0%" x2="100%" y2="100%">
@@ -253,6 +314,7 @@ const GeometricBg = () => {
     </defs>
   );
   
+  // --- Background Rectangle ---
   elements.push(
     <rect 
       key="background" 
@@ -264,6 +326,7 @@ const GeometricBg = () => {
     />
   );
   
+  // --- Golden Ratio Grid Lines ---
   const goldenGridLines = [];
   [width / phi, width - width / phi].forEach((x, i) => {
     goldenGridLines.push(
@@ -291,6 +354,7 @@ const GeometricBg = () => {
   });
   elements.push(<g key="golden-grid">{goldenGridLines}</g>);
   
+  // --- Geometric Curves ---
   const geometricCurves = [];
   vps.forEach((vp, vpIndex) => {
     const lineCount = vp.weight === 'high' ? 12 : 8;
@@ -342,6 +406,7 @@ const GeometricBg = () => {
   });
   elements.push(<g key="geometric-curves">{geometricCurves}</g>);
   
+  // --- Field Particles ---
   const fieldParticles = [];
   for (let i = 0; i < 40; i++) {
     const baseX = (i * 11.3) % width;
@@ -362,6 +427,7 @@ const GeometricBg = () => {
   }
   elements.push(<g key="field-particles">{fieldParticles}</g>);
   
+  // --- Letter Connections ---
   const letterConnections = [];
   letterParticles.forEach((l1, i) => {
     const sameWordLetters = letterParticles.filter(l => 
@@ -428,10 +494,11 @@ const GeometricBg = () => {
   });
   elements.push(<g key="letter-connections">{letterConnections}</g>);
   
+  // --- Animated Letter Elements ---
   const letterElements = letterParticles.map(particle => {
-    const pulse = 3 + Math.sin(time * 0.8 + particle.seqIndex + particle.letterIndex) * 0.1; // SLOWER
+    const pulse = 0.9 + Math.sin(time * TIMING.PULSE_FREQUENCY + particle.seqIndex + particle.letterIndex) * 0.1; // SLOWER, subtle pulsing
     const rotation = particle.wordPhase > 0.7 && particle.wordPhase < 0.95 ? 
-      Math.sin(time * 3.2 + particle.seqIndex + particle.letterIndex) * 25 : 0; // SLOWER
+      Math.sin(time * TIMING.ROTATION_SPEED + particle.seqIndex + particle.letterIndex) * 25 : 0; // SLOWER
     
     return (
       <text
@@ -455,6 +522,7 @@ const GeometricBg = () => {
   });
   elements.push(<g key="letters">{letterElements}</g>);
 
+// ==================== COMPONENT RENDER ====================
   return (
     <div className="geometric-bg">
       <svg 
@@ -471,6 +539,14 @@ const GeometricBg = () => {
 };
 
 export default GeometricBg;
+
+// ==================== IMPROVEMENTS MADE ====================
+// 1. PERFORMANCE: Memoized expensive calculations with useMemo and useCallback
+// 2. ACCESSIBILITY: Added prefers-reduced-motion support for users with motion sensitivity
+// 3. MAINTAINABILITY: Extracted magic numbers into named constants (ANIMATION_PHASES, OPACITY_LEVELS, TIMING)
+// 4. CODE QUALITY: Created helper functions for color selection and improved code organization
+// 5. REACT BEST PRACTICES: Proper dependency arrays and optimized re-renders
+// 6. CONFIGURABILITY: Centralized all animation parameters for easy tweaking
 
 // When rendering, you can adjust:
 // - SVG width/height for overall size
