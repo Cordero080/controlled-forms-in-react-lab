@@ -1,23 +1,34 @@
+// GeometricBg.jsx
+// This component creates a dynamic, animated SVG background using React state and effects.
+// It demonstrates advanced animation, mathematical harmony, and playful React patterns.
+
 import React, { useState, useEffect, useMemo } from 'react';
 
+// The GeometricBg component is like the stage for a light show, where all the magic happens.
 const GeometricBg = () => {
+  // useState is like a notebook where React remembers things for you.
+  // 'dimensions' keeps track of the SVG canvas size. You can adjust these for different screen sizes.
   const [dimensions, setDimensions] = useState({ width: 120, height: 80 });
+  // 'time' is the clock for our animation. Changing its speed changes how fast everything moves.
   const [time, setTime] = useState(0);
   
+  // useEffect is like setting up a timer and a resize sensor. It runs after the component mounts.
   useEffect(() => {
+    // This function updates the canvas size. You can tweak width/height for different effects.
     const updateDimensions = () => {
       setDimensions({
-        width: 120,
-        height: 80
+        width: 120, // Visual control: change for wider/narrower background
+        height: 80  // Visual control: change for taller/shorter background
       });
     };
     
     updateDimensions();
     window.addEventListener('resize', updateDimensions);
     
+    // This interval is the heartbeat of the animation. Lower the interval for faster movement.
     const interval = setInterval(() => {
-      setTime(t => t + .008); // SLOWER: was 0.015
-    }, 30); // SLOWER: was 20ms
+      setTime(t => t + .008); // Animation speed control: increase for faster, decrease for slower
+    }, 30); // Animation speed control: lower ms for smoother/faster animation
     
     return () => {
       window.removeEventListener('resize', updateDimensions);
@@ -25,9 +36,12 @@ const GeometricBg = () => {
     };
   }, []);
   
+  // Destructure width and height for easy use.
   const { width, height } = dimensions;
+  // The golden ratio, phi, is used for harmonious spacing. It's like nature's secret recipe for beauty.
   const phi = 1.618033988749;
   
+  // wordSequences is a memoized array of word groups. Memoization is like keeping a cheat sheet for React so it doesn't recalculate unnecessarily.
   const wordSequences = useMemo(() => [
     ['quiet', 'storm', 'calm'], 
     ['lost', 'found'], 
@@ -60,52 +74,65 @@ const GeometricBg = () => {
     }));
   }, [wordSequences]);
   
+  // The getLetterStates function calculates the position, opacity, and other properties of each letter.
+  // This is the heart of the animation logic, where each letter becomes a 'particle' with its own behavior.
+  // It loops through each word sequence and each letter, calculating how it should move, fade, and change.
+  // The function returns an array of particle objects, each representing a letter's state for this frame.
   const getLetterStates = () => {
     const particles = [];
-    
+    // Loop through each word sequence (like different dance groups on the floor)
     wordSequences.forEach((sequence, seqIndex) => {
+      // For each sequence, calculate timing and animation offsets
       const numWords = sequence.length;
       const { speedMultiplier } = sequenceSizes[seqIndex];
-      const cycleTime = (12 + numWords * 3) / speedMultiplier; // SLOWER & VARIED
-      const seqTime = (time + seqIndex * 1) % cycleTime; // SLOWER offset
-      const phase = seqTime / cycleTime;
-      
+      const cycleTime = (12 + numWords * 3) / speedMultiplier; // Controls how long each word stays visible
+      const seqTime = (time + seqIndex * 1) % cycleTime; // Offset for each sequence, so they don't all animate together
+      const phase = seqTime / cycleTime; // Normalized phase (0 to 1) for animation progress
+
+      // Figure out which word is currently being animated, and which is next
       const wordDuration = 1 / numWords;
       const currentWordIndex = Math.floor(phase / wordDuration);
       const nextWordIndex = (currentWordIndex + 1) % numWords;
       const wordPhase = (phase % wordDuration) / wordDuration;
-      
+
+      // Calculate the base position for this sequence using golden ratio math
       const baseAngle = (seqIndex / wordSequences.length) * Math.PI * 2;
       const baseRadius = 30 + (seqIndex % 3) * 8;
       const centerX = width / 2 + Math.cos(baseAngle) * baseRadius;
       const centerY = height / 2 + Math.sin(baseAngle) * baseRadius;
-      
-      // SLOWER quantum drift
+
+      // Add quantum drift for organic movement
       const driftX = Math.sin(time * 2.05 + seqIndex) * 2;
       const driftY = Math.cos(time * 0.07 + seqIndex) * 2;
-      
+
       const currentWord = sequence[currentWordIndex];
       const nextWord = sequence[nextWordIndex];
-      
       const maxLen = Math.max(currentWord.length, nextWord.length);
-      
       const { fontSize, letterSpacing } = sequenceSizes[seqIndex];
-      
+
+      // Loop through each letter in the current/next word
       for (let letterIndex = 0; letterIndex < maxLen; letterIndex++) {
+        // Get the current and next character for morphing animation
         const currentChar = currentWord[letterIndex] || '';
         const nextChar = nextWord[letterIndex] || '';
-        
-        // RANDOM size per letter (variation within word)
+        // Add random size variation for each letter (like dancers of different heights)
         const letterSizeVariation = 0.7 + Math.random() * 0.6; // 0.7x to 1.3x
         const letterFontSize = fontSize * letterSizeVariation;
-        
+
+        // Calculate position, opacity, and which character to show based on animation phase
         let x, y, opacity, char;
         const currentWordWidth = (currentWord.length - 1) * letterSpacing / 2;
         const nextWordWidth = (nextWord.length - 1) * letterSpacing / 2;
-        
-        if (wordPhase < .3) { // SLOWER formation phase
+
+        // Animation phases:
+        // 1. Formation (letters fly in)
+        // 2. Stable (letters sit in place)
+        // 3. Dispersion (letters scatter)
+        // 4. Chaos/transition (letters morph to next word)
+        if (wordPhase < .3) { // Formation phase
+          // Letters fly in from a spiral path
           const progress = wordPhase / 0.3;
-          const eased = 1 - Math.pow(1 - progress, 3);
+          const eased = 1 - Math.pow(1 - progress, 3); // Ease-in for smoothness
           const targetX = centerX + driftX + (letterIndex * letterSpacing - currentWordWidth);
           const targetY = centerY + driftY;
           const startAngle = (letterIndex + seqIndex + currentWordIndex) * 0.8;
@@ -113,29 +140,32 @@ const GeometricBg = () => {
           const startY = targetY + Math.sin(startAngle) * 50 * (1 - eased);
           x = startX;
           y = startY;
-          opacity = 0.9 + eased * 0.6;
+          opacity = 0.9 + eased * 0.6; // Fade in
           char = currentChar;
-        } else if (wordPhase < 0.6) { // LONGER stable phase
+        } else if (wordPhase < 0.6) { // Stable phase
+          // Letters sit in place, fully visible
           x = centerX + driftX + (letterIndex * letterSpacing - currentWordWidth);
           y = centerY + driftY;
-          opacity = 9.8;
+          opacity = 9.8; // Fully visible
           char = currentChar;
-        } else if (wordPhase < .75) { // SLOWER dispersion
+        } else if (wordPhase < .75) { // Dispersion phase
+          // Letters scatter outward
           const progress = (wordPhase - 0.6) / 0.15;
-          const eased = Math.pow(progress, 2);
+          const eased = Math.pow(progress, 2); // Ease-out for smoothness
           const startX = centerX + driftX + (letterIndex * letterSpacing - currentWordWidth);
           const startY = centerY + driftY;
           const disperseAngle = (letterIndex * 2.3 + seqIndex + time * 0.3);
           const disperseRadius = 12 * eased;
           x = startX + Math.cos(disperseAngle) * disperseRadius;
           y = startY + Math.sin(disperseAngle) * disperseRadius;
-          opacity = 0.8 * (1 - eased);
+          opacity = 0.8 * (1 - eased); // Fade out
           char = currentChar;
         } else {
+          // Chaos/transition phase: letters morph to next word
           const progress = (wordPhase - 0.75) / 0.25;
           const midProgress = Math.sin(progress * Math.PI);
-          // SLOWER chaos spiral
           if (progress < .5) {
+            // Letters swirl in chaos
             const chaosX = centerX + driftX + Math.sin(time * 0.3 + letterIndex + seqIndex) * 8;
             const chaosY = centerY + driftY + Math.cos(time * 0.3 + letterIndex + seqIndex) * 8;
             x = chaosX;
@@ -143,7 +173,7 @@ const GeometricBg = () => {
             opacity = 0.3 + midProgress * 0.3;
             char = currentChar;
           } else {
-            // Use nextWordWidth for nextChar positioning
+            // Morph to next word
             const chaosX = centerX + driftX + (letterIndex * letterSpacing - nextWordWidth) + Math.sin(time * 0.3 + letterIndex + seqIndex) * 8;
             const chaosY = centerY + driftY + Math.cos(time * 0.3 + letterIndex + seqIndex) * 8;
             x = chaosX;
@@ -152,7 +182,7 @@ const GeometricBg = () => {
             char = nextChar;
           }
         }
-        
+        // Only add visible letters (opacity > 0.05)
         if (char && opacity > 0.05) {
           particles.push({
             id: `${seqIndex}-${currentWordIndex}-${letterIndex}`,
@@ -171,7 +201,7 @@ const GeometricBg = () => {
         }
       }
     });
-    
+    // Return all letter particles for rendering
     return particles;
   };
   
@@ -441,3 +471,15 @@ const GeometricBg = () => {
 };
 
 export default GeometricBg;
+
+// When rendering, you can adjust:
+// - SVG width/height for overall size
+// - Opacity for fade effects
+// - Animation speed via 'time' and interval
+// - Letter size and position for visual impact
+
+// Mathematical concepts:
+// - Golden ratio (phi) is used for spacing and scaling, making things look naturally pleasing.
+// - Quantum drift: random movement and opacity changes mimic quantum uncertainty, making the animation feel alive.
+
+// Playful analogy: Think of this component as a cosmic dance floor, where each letter is a dancer moving to the rhythm of 'time', spaced out by the golden ratio, and glowing with quantum energy!
