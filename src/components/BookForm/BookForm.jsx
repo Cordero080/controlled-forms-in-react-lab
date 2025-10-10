@@ -34,7 +34,6 @@ const BookForm = ({ onBookAdd }) => {
   // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log(`Input ${name} changed to:`, value);
     setNewBook(prev => ({
       ...prev,
       [name]: value
@@ -44,7 +43,6 @@ const BookForm = ({ onBookAdd }) => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted with data:', newBook);
     
     // Simple validation
     if (!newBook.title.trim() || !newBook.author.trim() || !newBook.genre.trim()) {

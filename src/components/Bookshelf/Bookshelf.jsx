@@ -150,20 +150,17 @@ const Bookshelf = () => {
             {/* ARRAY MAPPING - Rendering Lists in React */}
             {/* ═══════════════════════════════════════════════════════════ */}
 
-            {books.map((book, index) => {
-              console.log(`Rendering book ${index}:`, book);
-              return (
-                <BookCard 
-                  key={index} 
-                  book={book} 
-                  onDelete={() => handleBookDelete(index)}
-                  isEditMode={isEditMode}
-                  isSelected={selectedBookIndex === index}
-                  onSelect={() => handleBookSelect(index)}
-                  onEdit={(updatedBook) => handleBookEdit(index, updatedBook)}
-                />
-              );
-            })}
+            {books.map((book, index) => (
+              <BookCard 
+                key={index} 
+                book={book} 
+                onDelete={() => handleBookDelete(index)}
+                isEditMode={isEditMode}
+                isSelected={selectedBookIndex === index}
+                onSelect={() => handleBookSelect(index)}
+                onEdit={(updatedBook) => handleBookEdit(index, updatedBook)}
+              />
+            ))}
           </div>
           
           {/* EXPAND/COLLAPSE BUTTON */}

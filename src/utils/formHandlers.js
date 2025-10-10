@@ -81,7 +81,6 @@ export const createToggleHandler = (setter) => {
  * @returns {Object} - { isValid: boolean, errors: string[] }
  */
 export const validateForm = (formData, requiredFields = []) => {
-  console.log('Validating form data:', formData, 'required fields:', requiredFields);
   const errors = [];
 
   requiredFields.forEach((field) => {
@@ -92,7 +91,6 @@ export const validateForm = (formData, requiredFields = []) => {
     }
   });
 
-  console.log('Validation result:', { isValid: errors.length === 0, errors });
   return {
     isValid: errors.length === 0,
     errors,

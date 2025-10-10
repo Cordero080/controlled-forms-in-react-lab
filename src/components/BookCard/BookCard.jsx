@@ -22,8 +22,6 @@ const BookCard = ({ book, onDelete, isEditMode, isSelected, onSelect, onEdit }) 
    * - onEdit: Function to save edited book data
    */
 
-  console.log('BookCard received book:', book);
-
   const [notes, setNotes] = useState(book.notes || '');
   const [showNotesInput, setShowNotesInput] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
