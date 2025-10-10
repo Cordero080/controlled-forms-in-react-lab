@@ -133,6 +133,7 @@ const BookForm = ({ onBookAdd }) => {
         </button>
       </form>
 
+
       {/* ERROR POPUP BUBBLE */}
       {formErrors.length > 0 && (
         <div className="errorPopup">

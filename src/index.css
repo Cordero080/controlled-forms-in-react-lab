@@ -21,8 +21,9 @@ h1 {
   color: rgba(93, 213, 226, 0.85);
   text-align: center;
   letter-spacing: 0.25em;
-  margin: 1.5vw auto 2.5vw;
-  padding: 0 2vw;
+  margin-top: 1.5vw auto 2.5vw;
+  padding: 0 4vw;
+  padding-top: 2rem;
   text-transform: uppercase;
   text-shadow: 
     0 0 10px rgba(93, 180, 166, 0.3),

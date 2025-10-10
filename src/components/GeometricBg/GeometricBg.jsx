@@ -14,7 +14,7 @@ const GeometricBg = () => {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   
 // ==================== ANIMATION SETUP ====================
-  // useEffect is like setting up a timer and a resize sensor. It runs after the component mounts. It's like a snitch that tells React something changed and you need to update the state of the component, the component being GeometricBg in this case.
+  // useEffect is like setting up a timer and a resize sensor. It runs after the component mounts.
   useEffect(() => {
     // Check for reduced motion preference
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -23,11 +23,11 @@ const GeometricBg = () => {
     const handleMotionPreferenceChange = (e) => setPrefersReducedMotion(e.matches);
     mediaQuery.addEventListener('change', handleMotionPreferenceChange);
     
-    // This function updates the canvas size.Tweak width/height for different effects.
+    // This function updates the canvas size. Tweak width/height for different effects.
     const updateDimensions = () => {
       setDimensions({
         width: 120, // Visual control: change for wider/narrower background
-        height: 60  // Visual control: change for taller/shorter background
+        height: 80  // Visual control: change for taller/shorter background (was 60)
       });
     };
     
@@ -53,8 +53,7 @@ const GeometricBg = () => {
 // ==================== CONSTANTS & CONFIGURATION ====================
   // Destructure width and height for easy use.
   const { width, height } = dimensions;
-  // ===========THE GOLDEN RATIO OF PHI==============used for harmonious spacing. Nature's secret recipe for beauty/symmetry.
-  // Here we will use it to position key elements in the design and only go up to 60% of the width/height of the canvas to keep things balanced.
+  // THE GOLDEN RATIO OF PHI - used for harmonious spacing. Nature's secret recipe for beauty/symmetry.
   const phi = 1.618033988749;
   
   // Animation phase constants for better maintainability
@@ -65,25 +64,28 @@ const GeometricBg = () => {
     CHAOS: 1.0
   };
   
-  // Opacity and timing constants
+  // ⬆️ ENHANCED: More dramatic opacity ranges for visual impact
   const OPACITY_LEVELS = {
-    FORMATION_START: 0.4,
-    FORMATION_RANGE: 0.5,
-    STABLE: 0.3,
-    DISPERSION_MULTIPLIER: 0.8,
-    CHAOS_BASE: 0.3,
-    CHAOS_RANGE: 0.3
+    FORMATION_START: 0.3,        // Start more subtle
+    FORMATION_RANGE: 0.6,        // Increased range for dramatic entrance
+    STABLE: 0.9,                 // More visible when stable
+    DISPERSION_MULTIPLIER: 0.7,  // Fade faster on dispersion
+    CHAOS_BASE: 0.2,             // More ghostly during chaos
+    CHAOS_RANGE: 0.4,
+    ECHO_MULTIPLIER: 0.3,        // NEW: For trail effects
   };
   
-  // Animation timing constants
+  // ⬇️ ENHANCED: Slower, more hypnotic timing
   const TIMING = {
-    ANIMATION_INTERVAL: 30,
-    TIME_INCREMENT: 0.008,
-    PULSE_FREQUENCY: 0.8,
-    ROTATION_SPEED: 3.2
+    ANIMATION_INTERVAL: 25,      // Smoother framerate
+    TIME_INCREMENT: 0.006,       // Slower, more meditative
+    PULSE_FREQUENCY: 0.5,        // Gentler pulse
+    ROTATION_SPEED: 2.5,         // Softer rotation
+    CHAOS_X_SPEED: 0.4,          // NEW: Chaos movement speed
+    CHAOS_Y_SPEED: 0.3,          // NEW: Chaos movement speed
   };
   
-  // Vanishing points for geometric curves - positioned using golden ratio for harmonious composition
+  // Vanishing points for geometric curves - positioned using golden ratio
   const vps = [
     { x: width / phi, y: height / phi, weight: 'high', energy: 'cerebral' },
     { x: width - width / phi, y: height - height / phi, weight: 'high', energy: 'emotion' },
@@ -91,7 +93,7 @@ const GeometricBg = () => {
     { x: width - width / phi, y: height / phi, weight: 'medium', energy: 'dynamic' },
   ];
   
-  // Color palettes organized by energy type for thematic consistency
+  // Color palettes organized by energy type
   const colorPalettes = {
     cerebral: ['#2E5B88', '#066bc3ff', '#6B9DC6'],
     emotion: ['#8B4FA8', '#A76FC2', '#C391DB'],
@@ -115,150 +117,194 @@ const GeometricBg = () => {
     return colorMap[seqIndex % 4] || '#E8A0CF';
   }, []);
   
-  // wordSequences is a memoized array of word groups. Memoization is like keeping a cheat sheet for React so it doesn't recalculate unnecessarily.
+  // ⬆️ NEW: Helper function to determine word personality/type
+  const getWordPersonality = useCallback((word) => {
+    if (!word) return 'standard';
+    if (word.length > 10) return 'philosophical'; // hypnagogia, Individuation
+    if (/[\u4E00-\u9FFF]/.test(word)) return 'ideographic'; // Chinese characters
+    if (['wu-wei', 'escalofrío', 'susurro', 'pneuma', 'psithurism', 'numinous', 'selcouth'].includes(word.toLowerCase())) {
+      return 'mystical';
+    }
+    return 'standard';
+  }, []);
+  
+  // Rich multilingual word sequences
   const wordSequences = useMemo(() => [
     ['quiet', 'storm', 'escalofrío'], 
-    ['lost', 'found'], 
+    ['lost', 'ethereal'], 
     ['龙', '詩','物','理'],
     ['time', 'EMBODY', 'flow'],
     ['word', 'echo', 'silence'], 
-    ['dream', 'wake', 'liminal'], 
+    ['dream', 'innovation', 'liminal'], 
     ['hypnagogia', 'threshold', 'sub-conscious'],
-    ['light', 'shadow', 'dusk', 'night'],
+    ['light', 'shadow', 'halcyon', 'night'],
     ['space', 'void', 'peace', 'equanimity'], 
-    ['CATALINA', 'dispersion', 'chaos'], 
-    ['fade', 'emerge', 'Clara','made', 'pneuma'],
+    ['Catalina', 'dispersion', 'chaos'], 
+    ['fade', 'emergence', 'Clara','liminal', 'pneuma'],
     ['pages', 'verses', 'sage'], 
     ['voice', 'whisper','susurro', 'choice', 'pensamiento'], 
     ['flow', 'osmosis', 'glow'],
-    ['world', 'cosmos', 'infinite', 'infinitum'], 
-    ['dance', 'spiral', 'trance'], 
+    ['world', 'cosmos', 'qualia', 'infinite'], 
+    ['dance', 'numinous', 'trance'], 
     ['story', 'myth', 'glory', 'legend'],
-    ['breathe', 'release', 'believe'], 
-    ['wander', 'wonder', 'wu-wei'], 
+    ['breathe', 'psithurism', 'believe'], 
+    ['wander', 'wonder', 'wu-wei', 'selcouth'], 
     ['begin', 'end', 'again'],
-    ['Idividuation','respira','despierta','sueña','revela']
+    ['Individuation','respira','despierta','sueña','revela']
   ], []);
   
   // MORE DRAMATIC size variations per word sequence
   const sequenceSizes = useMemo(() => {
     return wordSequences.map(() => ({
-      fontSize: 0.8 + Math.random() * 3, // BIGGER RANGE: 0.8 to 3.8
-      letterSpacing: 1.5 + Math.random() * 3.5, // 1.5 to 5
-      speedMultiplier: 0.4 + Math.random() * 0.8 // VARIED SPEED: 0.6x to 1.4x
+      fontSize: 0.8 + Math.random() * 3,
+      letterSpacing: 1.5 + Math.random() * 3,
+      speedMultiplier: 0.4 + Math.random() * 0.5 // Slightly wider range
     }));
   }, [wordSequences]);
   
 // ==================== ANIMATION LOGIC ====================
-  // The getLetterStates function calculates the position, opacity, and other properties of each letter.
-  // This is the heart of the animation logic, where each letter becomes a 'particle' with its own behavior.
-  // It loops through each word sequence and each letter, calculating how it should move, fade, and change.
-  // The function returns an array of particle objects, each representing a letter's state for this frame.
+  // ⬆️ ENHANCED: More sophisticated letter particle system with word personalities
   const getLetterStates = () => {
     const particles = [];
-    // Loop through each word sequence (like different dance groups on the floor)
+    
     wordSequences.forEach((sequence, seqIndex) => {
-      // For each sequence, calculate timing and animation offsets
       const numWords = sequence.length;
       const { speedMultiplier } = sequenceSizes[seqIndex];
-      const cycleTime = (12 + numWords * 3) / speedMultiplier; // Controls how long each word stays visible
-      const seqTime = (time + seqIndex * 1) % cycleTime; // Offset for each sequence, so they don't all animate together
-      const phase = seqTime / cycleTime; // Normalized phase (0 to 1) for animation progress
+      const cycleTime = (12 + numWords * 3) / speedMultiplier;
+      const seqTime = (time + seqIndex * 1) % cycleTime;
+      const phase = seqTime / cycleTime;
 
-      // Figure out which word is currently being animated, and which is next
       const wordDuration = 1 / numWords;
       const currentWordIndex = Math.floor(phase / wordDuration);
       const nextWordIndex = (currentWordIndex + 1) % numWords;
       const wordPhase = (phase % wordDuration) / wordDuration;
 
-      // Calculate the base position for this sequence using golden ratio math
+      // Calculate base position using golden ratio
       const baseAngle = (seqIndex / wordSequences.length) * Math.PI * 2;
-      const baseRadius = 30 + (seqIndex % 3) * 8;
+      const baseRadius = 30 + (seqIndex % 3) * 2;
       const centerX = width / 2 + Math.cos(baseAngle) * baseRadius;
       const centerY = height / 2 + Math.sin(baseAngle) * baseRadius;
 
-      // Add quantum drift for organic movement
-      const driftX = Math.sin(time * 2.05 + seqIndex) * 2;
+      // Quantum drift for organic movement
+      const driftX = Math.sin(time * 0.05 + seqIndex) * 2;
       const driftY = Math.cos(time * 0.07 + seqIndex) * 2;
 
       const currentWord = sequence[currentWordIndex];
       const nextWord = sequence[nextWordIndex];
       const maxLen = Math.max(currentWord.length, nextWord.length);
       const { fontSize, letterSpacing } = sequenceSizes[seqIndex];
+      
+      // ⬆️ NEW: Get word personality for specialized behavior
+      const currentPersonality = getWordPersonality(currentWord);
 
-      // Loop through each letter in the current/next word
       for (let letterIndex = 0; letterIndex < maxLen; letterIndex++) {
-        // Get the current and next character for morphing animation
         const currentChar = currentWord[letterIndex] || '';
         const nextChar = nextWord[letterIndex] || '';
-        // Add random size variation for each letter (like dancers of different heights)
-        const letterSizeVariation = 0.7 + Math.random() * 0.6; // 0.7x to 1.3x
-        const letterFontSize = fontSize * letterSizeVariation;
+        
+        // Base letter size variation
+        const letterSizeVariation = 0.7 + Math.random() * 0.6;
+        
+        // ⬆️ NEW: Adjust size based on character type and word personality
+        let sizeMultiplier = 1;
+        if (currentWord.length > 12) sizeMultiplier = 0.8; // Smaller for long words
+        if (/[\u4E00-\u9FFF]/.test(currentChar)) sizeMultiplier = 1.3; // Bigger for Chinese
+        if (currentPersonality === 'mystical') sizeMultiplier *= 1.1; // Slightly larger for mystical words
+        
+        const letterFontSize = fontSize * letterSizeVariation * sizeMultiplier;
 
-        // Calculate position, opacity, and which character to show based on animation phase
         let x, y, opacity, char;
         const currentWordWidth = (currentWord.length - 1) * letterSpacing / 2;
         const nextWordWidth = (nextWord.length - 1) * letterSpacing / 2;
 
-        // Animation phases:
-        // 1. Formation (letters fly in)
-        // 2. Stable (letters sit in place)
-        // 3. Dispersion (letters scatter)
-        // 4. Chaos/transition (letters morph to next word)
-        if (wordPhase < ANIMATION_PHASES.FORMATION) { // Formation phase
-          // Letters fly in from a spiral path
+        if (wordPhase < ANIMATION_PHASES.FORMATION) {
+          // Formation phase - letters fly in
           const progress = wordPhase / ANIMATION_PHASES.FORMATION;
-          const eased = 1 - Math.pow(1 - progress, 3); // Ease-in for smoothness
+          const eased = 1 - Math.pow(1 - progress, 3);
+          
           const targetX = centerX + driftX + (letterIndex * letterSpacing - currentWordWidth);
           const targetY = centerY + driftY;
+          
           const startAngle = (letterIndex + seqIndex + currentWordIndex) * 0.8;
           const startX = targetX + Math.cos(startAngle) * 30 * (1 - eased);
           const startY = targetY + Math.sin(startAngle) * 50 * (1 - eased);
+          
           x = startX;
           y = startY;
-          opacity = OPACITY_LEVELS.FORMATION_START + eased * OPACITY_LEVELS.FORMATION_RANGE; // Fade in more subtly
+          opacity = OPACITY_LEVELS.FORMATION_START + eased * OPACITY_LEVELS.FORMATION_RANGE;
           char = currentChar;
-        } else if (wordPhase < ANIMATION_PHASES.STABLE) { // Stable phase
-          // Letters sit in place, fully visible
+          
+        } else if (wordPhase < ANIMATION_PHASES.STABLE) {
+          // Stable phase - letters sit in place
           x = centerX + driftX + (letterIndex * letterSpacing - currentWordWidth);
           y = centerY + driftY;
-          opacity = OPACITY_LEVELS.STABLE; // Fully visible but not overpowering
+          opacity = OPACITY_LEVELS.STABLE;
           char = currentChar;
-        } else if (wordPhase < ANIMATION_PHASES.DISPERSION) { // Dispersion phase
-          // Letters scatter outward
+          
+          // ⬆️ NEW: Add echo/trail effect for mystical words
+          if (currentPersonality === 'mystical' && Math.random() > 0.7) {
+            particles.push({
+              id: `${seqIndex}-${currentWordIndex}-${letterIndex}-echo`,
+              char: currentChar,
+              x: x + Math.sin(time + letterIndex) * 0.5,
+              y: y + Math.cos(time + letterIndex) * 0.5,
+              opacity: OPACITY_LEVELS.STABLE * OPACITY_LEVELS.ECHO_MULTIPLIER,
+              seqIndex,
+              currentWordIndex,
+              letterIndex,
+              wordPhase,
+              fontSize: letterFontSize * 1.15,
+              color: getLetterColor(seqIndex)
+            });
+          }
+          
+        } else if (wordPhase < ANIMATION_PHASES.DISPERSION) {
+          // ⬆️ ENHANCED: Circular dispersion pattern
           const progress = (wordPhase - ANIMATION_PHASES.STABLE) / (ANIMATION_PHASES.DISPERSION - ANIMATION_PHASES.STABLE);
-          const eased = Math.pow(progress, 2); // Ease-out for smoothness
+          const eased = Math.pow(progress, 2);
+          
           const startX = centerX + driftX + (letterIndex * letterSpacing - currentWordWidth);
           const startY = centerY + driftY;
-          const disperseAngle = (letterIndex * 2.3 + seqIndex + time * 0.3);
-          const disperseRadius = 12 * eased;
+          
+          // Perfect circular dispersion - each letter evenly spaced around circle
+          const totalLetters = currentWord.length;
+          const disperseAngle = (letterIndex / totalLetters) * Math.PI * 2 + (time * 0.2);
+          const disperseRadius = 15 * eased; // Increased from 12 for more dramatic scatter
+          
           x = startX + Math.cos(disperseAngle) * disperseRadius;
           y = startY + Math.sin(disperseAngle) * disperseRadius;
-          opacity = OPACITY_LEVELS.DISPERSION_MULTIPLIER * (1 - eased); // Fade out
+          opacity = OPACITY_LEVELS.DISPERSION_MULTIPLIER * (1 - eased);
           char = currentChar;
+          
         } else {
-          // Chaos/transition phase: letters morph to next word
+          // ⬆️ ENHANCED: Chaos phase with pulsing radius and smoother transition
           const progress = (wordPhase - ANIMATION_PHASES.DISPERSION) / (ANIMATION_PHASES.CHAOS - ANIMATION_PHASES.DISPERSION);
           const midProgress = Math.sin(progress * Math.PI);
-          if (progress < .5) {
-            // Letters swirl in chaos
-            const chaosX = centerX + driftX + Math.sin(time * 0.3 + letterIndex + seqIndex) * 8;
-            const chaosY = centerY + driftY + Math.cos(time * 0.3 + letterIndex + seqIndex) * 8;
+          
+          // Pulsing chaos radius for more dynamic movement
+          const chaosRadius = 10 + Math.sin(time * 0.5 + letterIndex) * 5;
+          
+          if (progress < 0.5) {
+            // First half of chaos - current character
+            const chaosX = centerX + driftX + Math.sin(time * TIMING.CHAOS_X_SPEED + letterIndex + seqIndex) * chaosRadius;
+            const chaosY = centerY + driftY + Math.cos(time * TIMING.CHAOS_Y_SPEED + letterIndex + seqIndex) * chaosRadius;
             x = chaosX;
             y = chaosY;
             opacity = OPACITY_LEVELS.CHAOS_BASE + midProgress * OPACITY_LEVELS.CHAOS_RANGE;
             char = currentChar;
           } else {
-            // Morph to next word
-            const chaosX = centerX + driftX + (letterIndex * letterSpacing - nextWordWidth) + Math.sin(time * 0.3 + letterIndex + seqIndex) * 8;
-            const chaosY = centerY + driftY + Math.cos(time * 0.3 + letterIndex + seqIndex) * 8;
+            // Second half - morph to next character
+            const chaosX = centerX + driftX + (letterIndex * letterSpacing - nextWordWidth) + 
+                          Math.sin(time * TIMING.CHAOS_X_SPEED + letterIndex + seqIndex) * chaosRadius;
+            const chaosY = centerY + driftY + 
+                          Math.cos(time * TIMING.CHAOS_Y_SPEED + letterIndex + seqIndex) * chaosRadius;
             x = chaosX;
             y = chaosY;
             opacity = OPACITY_LEVELS.CHAOS_BASE + midProgress * OPACITY_LEVELS.CHAOS_RANGE;
             char = nextChar;
           }
         }
-        // Only add visible letters (opacity > 0.05)
+        
+        // Only add visible letters
         if (char && opacity > 0.05) {
           particles.push({
             id: `${seqIndex}-${currentWordIndex}-${letterIndex}`,
@@ -269,20 +315,18 @@ const GeometricBg = () => {
             letterIndex,
             wordPhase,
             fontSize: letterFontSize,
-            color: getLetterColor(seqIndex)
+            color: getLetterColor(seqIndex),
+            personality: currentPersonality // Store for potential use
           });
         }
       }
     });
-    // Return all letter particles for rendering
+    
     return particles;
   };
   
-  // Memoize expensive letter state calculations to prevent unnecessary re-computations
-  const letterParticles = useMemo(() => getLetterStates(), [time, wordSequences, sequenceSizes, width, height]);
-  
-// ==================== COLOR PALETTES & STYLING ====================
-// Color constants have been moved to CONSTANTS & CONFIGURATION section above
+  // Memoize expensive letter state calculations
+  const letterParticles = useMemo(() => getLetterStates(), [time, wordSequences, sequenceSizes, width, height, getWordPersonality, getLetterColor]);
   
 // ==================== SVG ELEMENT CONSTRUCTION ====================
   const elements = [];
@@ -334,9 +378,9 @@ const GeometricBg = () => {
         key={`golden-v-${i}`}
         x1={x} y1={0} x2={x} y2={height}
         stroke="#1E88E5"
-        strokeWidth="49.08"
+        strokeWidth="0.08"
         opacity="0.12"
-        strokeDasharray="11 17"
+        strokeDasharray="3 6"
       />
     );
   });
@@ -370,7 +414,7 @@ const GeometricBg = () => {
         case 3: startX = 0; startY = (i * 23.7) % height; break;
       }
       
-      const animOffset = (time * 0.3 + i * 0.15 + vpIndex) % 3; // SLOWER
+      const animOffset = (time * 0.3 + i * 0.15 + vpIndex) % 3;
       const progress = 0.2 + (Math.sin(animOffset * Math.PI / 1.5) * 0.3);
       
       const targetX = vp.x + (startX - vp.x) * progress;
@@ -380,9 +424,9 @@ const GeometricBg = () => {
       const midY = (startY + targetY) / 4;
       const dx = targetX - startX;
       const dy = targetY - startY;
-      const perpX = -dy * 9.2;
+      const perpX = -dy * 2.2;
       const perpY = dx * 0.2;
-      const wave = Math.sin(time * 0.2 + i + vpIndex) * 2; // SLOWER wave
+      const wave = Math.sin(time * 0.2 + i + vpIndex) * 2;
       const ctrlX = midX + perpX + wave;
       const ctrlY = midY + perpY + wave;
       
@@ -411,8 +455,8 @@ const GeometricBg = () => {
   for (let i = 0; i < 40; i++) {
     const baseX = (i * 11.3) % width;
     const baseY = (i * 17.7) % height;
-    const x = baseX + Math.sin(time * 0.15 + i) * 1.5; // SLOWER
-    const y = baseY + Math.cos(time * 0.2 + i) * 1.5; // SLOWER
+    const x = baseX + Math.sin(time * 0.15 + i) * 1.5;
+    const y = baseY + Math.cos(time * 0.2 + i) * 1.5;
     const size = 0.12 + Math.sin(time * 1.5 + i) * 0.06;
     const opacity = .55 + Math.sin(time * 0.8 + i * 0.5) * 0.15;
     
@@ -428,6 +472,7 @@ const GeometricBg = () => {
   elements.push(<g key="field-particles">{fieldParticles}</g>);
   
   // --- Letter Connections ---
+  // ⬆️ ENHANCED: More visible quantum entanglement connections
   const letterConnections = [];
   letterParticles.forEach((l1, i) => {
     const sameWordLetters = letterParticles.filter(l => 
@@ -442,7 +487,7 @@ const GeometricBg = () => {
       const dy = l2.y - l1.y;
       const midX = (l1.x + l2.x) / 2;
       const midY = (l1.y + l2.y) / 2;
-      const curvature = Math.sin(time * 0.5 + l1.seqIndex) * 0.5; // SLOWER
+      const curvature = Math.sin(time * 0.5 + l1.seqIndex) * 0.5;
       const ctrlX = midX - dy * 0.1 + curvature;
       const ctrlY = midY + dx * 0.1;
       
@@ -451,8 +496,8 @@ const GeometricBg = () => {
           key={`word-connection-${l1.id}-${l2.id}`}
           d={`M ${l1.x} ${l1.y} Q ${ctrlX} ${ctrlY} ${l2.x} ${l2.y}`}
           stroke={l1.color}
-          strokeWidth={0.15}
-          opacity={0.3 * l1.opacity}
+          strokeWidth={0.2}
+          opacity={0.4 * l1.opacity}
           fill="none"
           strokeDasharray="0.5 1"
           filter="url(#glow)"
@@ -472,7 +517,7 @@ const GeometricBg = () => {
         const midY = (l1.y + l2.y) / 2;
         const perpX = -dy / dist;
         const perpY = dx / dist;
-        const curve = Math.sin(time * 0.25 + i) * 3; // SLOWER
+        const curve = Math.sin(time * 0.25 + i) * 3;
         const ctrlX = midX + perpX * curve;
         const ctrlY = midY + perpY * curve;
         
@@ -496,9 +541,9 @@ const GeometricBg = () => {
   
   // --- Animated Letter Elements ---
   const letterElements = letterParticles.map(particle => {
-    const pulse = 0.9 + Math.sin(time * TIMING.PULSE_FREQUENCY + particle.seqIndex + particle.letterIndex) * 0.1; // SLOWER, subtle pulsing
+    const pulse = 0.9 + Math.sin(time * TIMING.PULSE_FREQUENCY + particle.seqIndex + particle.letterIndex) * 0.1;
     const rotation = particle.wordPhase > 0.7 && particle.wordPhase < 0.95 ? 
-      Math.sin(time * TIMING.ROTATION_SPEED + particle.seqIndex + particle.letterIndex) * 25 : 0; // SLOWER
+      Math.sin(time * TIMING.ROTATION_SPEED + particle.seqIndex + particle.letterIndex) * 25 : 0;
     
     return (
       <text
@@ -539,23 +584,3 @@ const GeometricBg = () => {
 };
 
 export default GeometricBg;
-
-// ==================== IMPROVEMENTS MADE ====================
-// 1. PERFORMANCE: Memoized expensive calculations with useMemo and useCallback
-// 2. ACCESSIBILITY: Added prefers-reduced-motion support for users with motion sensitivity
-// 3. MAINTAINABILITY: Extracted magic numbers into named constants (ANIMATION_PHASES, OPACITY_LEVELS, TIMING)
-// 4. CODE QUALITY: Created helper functions for color selection and improved code organization
-// 5. REACT BEST PRACTICES: Proper dependency arrays and optimized re-renders
-// 6. CONFIGURABILITY: Centralized all animation parameters for easy tweaking
-
-// When rendering, you can adjust:
-// - SVG width/height for overall size
-// - Opacity for fade effects
-// - Animation speed via 'time' and interval
-// - Letter size and position for visual impact
-
-// Mathematical concepts:
-// - Golden ratio (phi) is used for spacing and scaling, making things look naturally pleasing.
-// - Quantum drift: random movement and opacity changes mimic quantum uncertainty, making the animation feel alive.
-
-// Playful analogy: Think of this component as a cosmic dance floor, where each letter is a dancer moving to the rhythm of 'time', spaced out by the golden ratio, and glowing with quantum energy!

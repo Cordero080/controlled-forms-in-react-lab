@@ -51,10 +51,10 @@ export const createSubmitHandler = (
     errorSetter([]);
 
     // Add new item to array using spread operator
-    console.log('Form submission - adding item:', formData);
+    console.log("Form submission - adding item:", formData);
     arraySetter((prevArray) => {
       const newArray = [...prevArray, formData];
-      console.log('New array after addition:', newArray);
+      console.log("New array after addition:", newArray);
       return newArray;
     });
 

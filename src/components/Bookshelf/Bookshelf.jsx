@@ -130,8 +130,8 @@ const Bookshelf = () => {
       <ToggleButton
         isActive={isBookshelfVisible}
         onToggle={() => setIsBookshelfVisible(!isBookshelfVisible)}
-        activeText="Unveil the Bookshelf ▲"
-        inactiveText="ENTER  BOOKSHELF ▼"
+        activeText="EXIT ▲"
+        inactiveText="ENTER BOOKSHELF ▼"
         className="bookshelf-title"
       />
       

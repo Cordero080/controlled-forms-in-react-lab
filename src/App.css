@@ -25,6 +25,7 @@
 .bookshelfContainer {
   position: static; /* Allow child elements to move freely */
   width: 90%;
+  
   max-width: 650px;
   margin: 0 auto;
   z-index: 2;

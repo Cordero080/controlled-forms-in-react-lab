@@ -12,6 +12,18 @@
   font-family: 'Dune_rise', sans-serif; /* Apply Dune font to the title */
   cursor: pointer;
   transition: color 0.3s ease;
+  
+  /* Remove button styling to make it look like plain text */
+  background: none;
+  border: none;
+  box-shadow: none;
+  text-shadow: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
+  margin-top: 18px; /* Add space beneath the text */
+  text-transform: none;
+  letter-spacing: normal;
 }
 
 .bookshelfDiv {
@@ -70,10 +82,10 @@
   margin-left: 10px;
   padding: 4px 20px;
  
-  background: linear-gradient(135deg, #4facfe7e, #1c259791); /* Blue gradient for edit mode */
+   /* Blue gradient for edit mode */
   opacity: 0.8;
-  border: none;
-  color: #f0f0eac2;
+  border: rgba(96, 229, 239, 0.459) 2px solid;
+  color: #fafaedc2;
   font-family: 'Orbitron', sans-serif;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
