@@ -142,6 +142,9 @@ const Bookshelf = () => {
       {isBookshelfVisible && (
         <div>
           
+          {/* SUBTITLE AT TOP OF BOOKSHELF */}
+          <p className="exit-subtitle">unveil the bookshelf</p>
+          
           {/* BOOKSHELF DIV with dynamic className */}
           {/* Template literal allows conditional class: 'expanded' added when isExpanded=true */}
           <div className={`bookshelfDiv ${isExpanded ? 'expanded' : ''}`}>

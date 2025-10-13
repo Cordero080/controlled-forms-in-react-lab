@@ -156,7 +156,7 @@ const GeometricBg = () => {
   // MORE DRAMATIC size variations per word sequence
   const sequenceSizes = useMemo(() => {
     return wordSequences.map(() => ({
-      fontSize: 0.8 + Math.random() * 3,
+      fontSize: 0.8 + Math.random() * 2.7,
       letterSpacing: 1.5 + Math.random() * 3,
       speedMultiplier: 0.4 + Math.random() * 0.5 // Slightly wider range
     }));

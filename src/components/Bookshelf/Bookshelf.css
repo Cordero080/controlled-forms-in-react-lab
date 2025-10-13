@@ -96,6 +96,17 @@
   transform: scale(1.05);
 }
 
+.exit-subtitle {
+  font-family: 'Dune_rise', sans-serif;
+  font-size: 1.4rem;
+  color: rgba(22, 186, 178, 0.31);
+  text-transform: lowercase;
+  margin: -12px 0 0 0;
+  text-align: center;
+  letter-spacing: 0.08em;
+  opacity: 1;
+}
+
 h1 {
   font-size: 3rem; /* Larger font size for emphasis */
   color: #ffb300d1; /* Bright gold color to stand out */
