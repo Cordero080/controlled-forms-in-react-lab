@@ -521,8 +521,11 @@ const GeometricBg = () => {
       );
     });
     
-    letterParticles.slice(i + 1).forEach((l2) => {
-      if (l2.seqIndex === l1.seqIndex) return;
+    // OPTIMIZATION: Instead of comparing every particle (O(n^2)), only check a few subsequent particles.
+    const nonlocalCheckLimit = 5; // Check the next 5 particles
+    for (let j = 1; j < nonlocalCheckLimit && (i + j) < letterParticles.length; j++) {
+      const l2 = letterParticles[i + j];
+      if (l2.seqIndex === l1.seqIndex) continue;
       
       const dx = l1.x - l2.x;
       const dy = l1.y - l2.y;
@@ -551,7 +554,7 @@ const GeometricBg = () => {
           />
         );
       }
-    });
+    }
   });
   elements.push(<g key="letter-connections">{letterConnections}</g>);
   
