@@ -155,12 +155,20 @@ const GeometricBg = () => {
   
   // MORE DRAMATIC size variations per word sequence
   const sequenceSizes = useMemo(() => {
-    return wordSequences.map(() => ({
-      fontSize: 0.8 + Math.random() * 2.7,
-      letterSpacing: 1.5 + Math.random() * 3,
-      speedMultiplier: 0.4 + Math.random() * 0.5 // Slightly wider range
-    }));
-  }, [wordSequences]);
+    const fastProportion = 1 - (1 / phi); // Proportion of words that should be fast, based on golden ratio
+
+    return wordSequences.map(() => {
+      const isFast = Math.random() < fastProportion;
+      return {
+        fontSize: 1.1 + Math.random() * 2.3, // Increased base size for legibility
+        letterSpacing: 1.5 + Math.random() * 3,
+        speedMultiplier: isFast 
+          ? 1.0 + Math.random() * 0.5  // Fast range (e.g., 1.0 to 1.5)
+          : 0.3 + Math.random() * 0.4, // Slow range (e.g., 0.3 to 0.7)
+        isDynamic: Math.random() > 0.5, // Randomly decide if a word sequence should be dynamic (pulsate and resize)
+      };
+    });
+  }, [wordSequences, phi]);
   
 // ==================== ANIMATION LOGIC ====================
   // ⬆️ ENHANCED: More sophisticated letter particle system with word personalities
@@ -192,7 +200,7 @@ const GeometricBg = () => {
       const currentWord = sequence[currentWordIndex];
       const nextWord = sequence[nextWordIndex];
       const maxLen = Math.max(currentWord.length, nextWord.length);
-      const { fontSize, letterSpacing } = sequenceSizes[seqIndex];
+      const { fontSize, letterSpacing, isDynamic } = sequenceSizes[seqIndex];
       
       // ⬆️ NEW: Get word personality for specialized behavior
       const currentPersonality = getWordPersonality(currentWord);
@@ -201,8 +209,8 @@ const GeometricBg = () => {
         const currentChar = currentWord[letterIndex] || '';
         const nextChar = nextWord[letterIndex] || '';
         
-        // Base letter size variation
-        const letterSizeVariation = 0.7 + Math.random() * 0.6;
+        // Base letter size variation - only apply if the word is dynamic
+        const letterSizeVariation = isDynamic ? 0.7 + Math.random() * 0.6 : 1.0;
         
         // ⬆️ NEW: Adjust size based on character type and word personality
         let sizeMultiplier = 1;
@@ -258,17 +266,25 @@ const GeometricBg = () => {
           }
           
         } else if (wordPhase < ANIMATION_PHASES.DISPERSION) {
-          // ⬆️ ENHANCED: Circular dispersion pattern
+          // ⬆️ ENHANCED: Circular dispersion pattern with velocity based on font size
           const progress = (wordPhase - ANIMATION_PHASES.STABLE) / (ANIMATION_PHASES.DISPERSION - ANIMATION_PHASES.STABLE);
           const eased = Math.pow(progress, 2);
           
           const startX = centerX + driftX + (letterIndex * letterSpacing - currentWordWidth);
           const startY = centerY + driftY;
+
+          // Velocity Enhancement: Smaller words move faster.
+          // We establish a base radius and then amplify it for smaller font sizes.
+          const baseDisperseRadius = 15;
+          // Create a multiplier that is larger for smaller fonts.
+          // The value '2.0' is a good average font size. Fonts smaller than this get a velocity boost.
+          const velocityFactor = Math.max(0.5, 2.0 / fontSize);
           
           // Perfect circular dispersion - each letter evenly spaced around circle
           const totalLetters = currentWord.length;
           const disperseAngle = (letterIndex / totalLetters) * Math.PI * 2 + (time * 0.2);
-          const disperseRadius = 15 * eased; // Increased from 12 for more dramatic scatter
+          // Apply the velocity factor to the radius.
+          const disperseRadius = baseDisperseRadius * velocityFactor * eased;
           
           x = startX + Math.cos(disperseAngle) * disperseRadius;
           y = startY + Math.sin(disperseAngle) * disperseRadius;
@@ -541,7 +557,8 @@ const GeometricBg = () => {
   
   // --- Animated Letter Elements ---
   const letterElements = letterParticles.map(particle => {
-    const pulse = 0.9 + Math.sin(time * TIMING.PULSE_FREQUENCY + particle.seqIndex + particle.letterIndex) * 0.1;
+    const isDynamic = sequenceSizes[particle.seqIndex].isDynamic;
+    const pulse = isDynamic ? 0.9 + Math.sin(time * TIMING.PULSE_FREQUENCY + particle.seqIndex + particle.letterIndex) * 0.1 : 1.0;
     const rotation = particle.wordPhase > 0.7 && particle.wordPhase < 0.95 ? 
       Math.sin(time * TIMING.ROTATION_SPEED + particle.seqIndex + particle.letterIndex) * 25 : 0;
     
