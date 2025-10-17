@@ -39,8 +39,8 @@ To preserve the original artistic vision while ensuring practical performance, t
 
 ### `bookshelf-optimus` (The Optimized Release)
 
-- **Purpose:** A performance-optimized version suitable for live deployment.
-- **Details:** This branch makes a subtle but critical trade-off for performance. The expensive O(n²) particle connection logic is replaced with a more efficient O(n\*k) approach, limiting checks to nearby particles. The visual difference is negligible, but the performance gain is significant, ensuring a smooth user experience on a wider range of devices.
+- **Purpose:** This branch represents the performance-optimized version of the expanded "Quantum Literary Bookshelf" project, which evolved far beyond the original `controlled-forms-in-react-lab` assignment. It is the recommended version for live deployment.
+- **Details:** This branch makes a subtle but critical trade-off for performance. The expensive O(n²) particle connection logic from the `main` branch is replaced with a more efficient O(n*k) approach, limiting checks to nearby particles. The visual difference is negligible, but the performance gain is significant, ensuring a smooth user experience on a wider range of devices.
 
 ### `bookshelf-obscuritas` (The Experimental Lab)
 
