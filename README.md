@@ -28,6 +28,27 @@ Evolved into: An exploration of quantum physics visualization, advanced React pa
 
 ---
 
+## 🌿 Branching Strategy & Project Versions
+
+To preserve the original artistic vision while ensuring practical performance, this project is managed across multiple branches. Each branch serves a distinct purpose, representing a different version of the application.
+
+### `main` (The Artistic Master)
+
+- **Purpose:** This branch holds the original, uncompromised "director's cut" of the animation.
+- **Details:** It features the full O(n²) "quantum entanglement" effect, where any letter particle can connect with any other, creating a truly holistic and unpredictable system. This is the high-fidelity master version, preserved as the creative gold standard.
+
+### `bookshelf-optimus` (The Optimized Release)
+
+- **Purpose:** A performance-optimized version suitable for live deployment.
+- **Details:** This branch makes a subtle but critical trade-off for performance. The expensive O(n²) particle connection logic is replaced with a more efficient O(n\*k) approach, limiting checks to nearby particles. The visual difference is negligible, but the performance gain is significant, ensuring a smooth user experience on a wider range of devices.
+
+### `bookshelf-obscuritas` (The Experimental Lab)
+
+- **Purpose:** A future development branch for creative exploration.
+- **Details:** This branch is planned for experimenting with a new dark visual theme and alternative animation concepts, providing a sandbox for new ideas without affecting the stable versions.
+
+---
+
 ## 📸 Screenshots
 
 ### Main Interface
