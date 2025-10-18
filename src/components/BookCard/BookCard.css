@@ -72,6 +72,7 @@
 .edit-form {
   display: flex;
   flex-direction: column;
+  align-items: center; /* Center children horizontally */
   gap: 8px;
   width: 100%;
 }
@@ -150,8 +151,8 @@
   gap: 12px;
   flex-wrap: wrap;
   width: 100%;
-  margin: 0 auto;
-  padding: 8px 0;
+  margin: -8px auto 8px; /* Negative top margin, 8px bottom margin to match spacing */
+  padding: 0 0 0 20px; /* Removed top/bottom padding, kept left padding to shift buttons right */
 }
 
 .option-button {
@@ -212,9 +213,13 @@
   font-size: .85rem; /* Slightly smaller than default 1rem */
 }
 
-.bookCard.selected .edit-form,
+.bookCard.selected .edit-form {
+  align-items: center; /* Center the edit-options buttons */
+  width: 100%;
+}
+
 .bookCard.selected .notes-form {
-  align-items: stretch; /* Stretch items to full width */
+  align-items: stretch; /* Stretch textarea to full width */
   width: 100%;
 }
 
