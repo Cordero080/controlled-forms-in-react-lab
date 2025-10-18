@@ -94,6 +94,7 @@ const BookForm = ({ onBookAdd }) => {
           name="title"
           value={newBook.title}
           onChange={handleInputChange}
+          className="cosmic-input"
         />
 
         <label htmlFor="author">Author:</label>
@@ -103,6 +104,7 @@ const BookForm = ({ onBookAdd }) => {
           name="author"
           value={newBook.author}
           onChange={handleInputChange}
+          className="cosmic-input"
         />
 
         <label htmlFor="genre">Genre:</label>
@@ -111,7 +113,7 @@ const BookForm = ({ onBookAdd }) => {
           name="genre"
           value={newBook.genre}
           onChange={handleInputChange}
-          className="genre-dropdown"
+          className="cosmic-input genre-dropdown"
         >
           <option value="">Select a genre...</option>
           <option value="Fiction">Fiction</option>

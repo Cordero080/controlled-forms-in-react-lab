@@ -6,6 +6,8 @@
   padding: 12px;
   color: #E8F4F8;
   transition: all 0.3s ease-in-out;
+  position: relative;
+  z-index: 1;
 }
 
 .bookshelf-title {
@@ -143,11 +145,9 @@ label {
   display: block; /* Ensure labels are on their own line */
 }
 
-.add-book {
-  color: #FFFFFF; /* Pure white for maximum brightness */
-  text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 255, 255, 0.9); /* Intense glowing effect */
-  font-size: 1.8rem; /* Further increase font size */
-  font-weight: 900; /* Extra bold for emphasis */
+.formDiv {
+  position: relative;
+  z-index: 2;
 }
 
 .bookCard h3 {

@@ -56,7 +56,7 @@ const BookCard = ({ book, onDelete, isEditMode, isSelected, onSelect, onEdit }) 
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                className="notes-input"
+                className="cosmic-input notes-input"
                 placeholder="Add your notes about this book..."
                 rows="3"
               />
