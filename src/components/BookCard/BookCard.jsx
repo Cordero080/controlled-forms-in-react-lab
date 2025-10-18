@@ -53,6 +53,7 @@ const BookCard = ({ book, onDelete, isEditMode, isSelected, onSelect, onEdit }) 
             </div>
           ) : (
             <div className="notes-form" onClick={(e) => e.stopPropagation()}>
+              <h3 className="notes-book-title">{book.title}</h3>
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}

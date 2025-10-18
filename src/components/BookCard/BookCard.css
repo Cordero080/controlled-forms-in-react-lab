@@ -32,8 +32,8 @@
 
 /* Selected book - thicker border, different color, expanded */
 .bookCard.selected {
-  border: 2px solid rgba(40, 167, 69, 0.9);
-  box-shadow: 0 0 20px rgba(40, 167, 69, 0.5);
+  border: 1px solid rgba(82, 254, 165, 0.623);
+  box-shadow: 0 0 20px rgba(77, 76, 131, 0.358);
   transform: none;
   grid-column: 1 / -1;
   width: 38%; /* Smaller initial width for compact button display */
@@ -41,6 +41,7 @@
   margin: 0 auto;
   z-index: 10;
   cursor: default;
+  filter: brightness(1.1);
 }
 
 .delete-button {
@@ -73,12 +74,14 @@
   display: flex;
   flex-direction: column;
   align-items: center; /* Center children horizontally */
+  justify-content: flex-end; /* Push content to bottom */
   gap: 8px;
   width: 100%;
+  min-height: 50px; /* Reduced minimum height */
 }
 
 .edit-input, .edit-select {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(219, 11, 11, 0.1);
   border: 1px solid rgba(93, 180, 166, 0.5);
   border-radius: 5px;
   padding: 6px 8px;
@@ -148,7 +151,7 @@
   gap: 12px;
   flex-wrap: wrap;
   width: 100%;
-  margin: -8px auto 8px; /* Negative top margin, 8px bottom margin to match spacing */
+  margin: 0 auto 8px; /* No top margin, 8px bottom margin */
   padding: 0 0 0 20px; /* Removed top/bottom padding, kept left padding to shift buttons right */
 }
 
@@ -201,6 +204,18 @@
   box-sizing: border-box;
 }
 
+/* Book title in notes form */
+.notes-book-title {
+  color: #E8F4F8;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0 auto 8px auto;
+  width: 100%;
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+  align-self: center;
+}
+
 /* Notes textarea - inherits cosmic-input base styles from shared file */
 .notes-input.cosmic-input {
   width: 100%;
@@ -219,7 +234,7 @@
    ADJUSTED: Increases card width when notes form is shown so it stays expanded during typing
    This overrides the parent .bookCard.selected width */
 .bookCard.selected .notes-form {
-  align-items: stretch; /* Stretch textarea to full width */
+  align-items: center; /* Center all children including title and textarea */
   max-width: 800px;
   width: 100%;
   margin: 0 100px !important; /* 100px margin on left and right */
@@ -257,10 +272,10 @@
 }
 
 .save-notes-button {
-  background: rgba(15, 30, 55, 0.3);
+  background: rgba(31, 70, 138, 0.3);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(37, 253, 217, 0.458);
-  color: #31cafdec;
+  color: #31cafd;
   border-radius: 8px;
   padding: 3px 9px;
   font-family: 'Orbitron', sans-serif;
@@ -285,10 +300,10 @@
 }
 
 .cancel-notes-button {
-  background: rgba(15, 30, 55, 0.3);
+  background: rgba(15, 30, 55, 0.306);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(185, 61, 11, 0.78);
-  color: rgba(224, 209, 8, 0.642);
+  color: rgba(224, 210, 8, 0.671);
   border-radius: 8px;
   padding: 3px 9px;
   font-family: 'Orbitron', sans-serif;
