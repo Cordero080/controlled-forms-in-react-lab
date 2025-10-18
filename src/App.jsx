@@ -9,7 +9,7 @@ const App = () => {
    return (
       <>
             <GeometricBg />
-            <div className="title"style={{ position: 'relative', zIndex: 2 }}>
+            <div className="title">
                <h1>MY BOOKSHELF</h1>
                <Bookshelf />
             </div>

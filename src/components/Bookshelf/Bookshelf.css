@@ -6,6 +6,8 @@
   padding: 12px;
   color: #E8F4F8;
   transition: all 0.3s ease-in-out;
+  position: relative;
+  z-index: 1;
 }
 
 .bookshelf-title {
@@ -107,16 +109,22 @@
   opacity: 1;
 }
 
+.title {
+  position: relative;
+  z-index: 2;
+}
+
 h1 {
-  font-size: 3rem; /* Larger font size for emphasis */
-  color: #ffb300d1; /* Bright gold color to stand out */
-  text-shadow: 0 0 15px rgba(4, 50, 200, 0.908), 0 0 30px rgba(255, 217, 0, 0.891); /* Glowing effect */
-  font-weight: bold; /* Make the title bold */
-  text-align: center; /* Center the title */
-  margin-bottom: 30px; /* Add spacing below the title */
+  font-size: 3rem;
+  color: #ffb300d1;
+  text-shadow: 0 0 15px rgba(4, 50, 200, 0.908), 0 0 30px rgba(255, 217, 0, 0.891);
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
   margin-top: 200px;
-  transition: color 0.5s ease, text-shadow 0.5s ease; /* Smooth transition for hover effects */
-  animation: float 3s ease-in-out infinite; /* Add floating animation */
+  margin-left: 20px;
+  transition: color 0.5s ease, text-shadow 0.5s ease;
+  animation: float 3s ease-in-out infinite;
 }
 
 h1:hover {
@@ -143,11 +151,9 @@ label {
   display: block; /* Ensure labels are on their own line */
 }
 
-.add-book {
-  color: #FFFFFF; /* Pure white for maximum brightness */
-  text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 255, 255, 0.9); /* Intense glowing effect */
-  font-size: 1.8rem; /* Further increase font size */
-  font-weight: 900; /* Extra bold for emphasis */
+.formDiv {
+  position: relative;
+  z-index: 2;
 }
 
 .bookCard h3 {

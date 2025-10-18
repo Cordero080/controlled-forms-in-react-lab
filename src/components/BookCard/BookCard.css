@@ -1,3 +1,13 @@
+/* 
+  SHARED INPUT STYLES
+  ====================
+  The cosmic holographic background styles are now centralized in:
+  src/styles/shared-input-styles.css
+  
+  Make adjustments there for uniform changes across all inputs/textareas.
+*/
+@import '../../styles/shared-input-styles.css';
+
 .bookCard {
   background: rgba(1, 5, 12, 0.338);
   border: 1px solid rgba(93, 180, 166, 0.721);
@@ -22,9 +32,13 @@
 
 /* Selected book - thicker border, different color, expanded */
 .bookCard.selected {
-  border: 3px solid rgba(40, 167, 69, 0.9);
+  border: 2px solid rgba(40, 167, 69, 0.9);
   box-shadow: 0 0 20px rgba(40, 167, 69, 0.5);
-  transform: scale(1.1);
+  transform: none;
+  grid-column: 1 / -1;
+  width: 38%; /* Smaller initial width for compact button display */
+  max-width: 380px;
+  margin: 0 auto;
   z-index: 10;
   cursor: default;
 }
@@ -58,6 +72,7 @@
 .edit-form {
   display: flex;
   flex-direction: column;
+  align-items: center; /* Center children horizontally */
   gap: 8px;
   width: 100%;
 }
@@ -131,13 +146,13 @@
 
 .edit-options {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center; /* Center the remove and notes buttons within the edit section */
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
   width: 100%;
-  margin: 0 auto;
-  padding: 8px 0;
+  margin: -8px auto 8px; /* Negative top margin, 8px bottom margin to match spacing */
+  padding: 0 0 0 20px; /* Removed top/bottom padding, kept left padding to shift buttons right */
 }
 
 .option-button {
@@ -182,38 +197,60 @@
 .notes-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch; /* Stretch items to full width */
   gap: 12px;
-  padding: 8px;
+  padding: 0;
   width: 100%;
   box-sizing: border-box;
 }
 
+/* Notes textarea - inherits cosmic-input base styles from shared file */
 .notes-input {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(93, 180, 166, 0.5);
-  border-radius: 5px;
-  padding: 8px;
-  color: #E8F4F8;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.8rem;
-  height: 20px;
-  width: 300px;
-  margin-right:-2.5rem;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  box-sizing: border-box;
+  width: 100%;
   resize: vertical;
-  min-height: 80px;
+  min-height: 160px;
   text-align: center;
+  font-size: .85rem; /* Slightly smaller than default 1rem */
 }
 
-.notes-input:focus {
-  outline: none;
-  border-color: rgba(93, 180, 166, 0.8);
-  box-shadow: 0 0 5px rgba(93, 180, 166, 0.4);
+.bookCard.selected .edit-form {
+  align-items: center; /* Center the edit-options buttons */
+  width: 100%;
 }
+
+.bookCard.selected .notes-form {
+  align-items: stretch; /* Stretch textarea to full width */
+  width: 100%;
+}
+
+/* Notes form expands wider when user clicks "+ Notes" button 
+   ADJUSTED: Increases card width when notes form is shown so it stays expanded during typing
+   This overrides the parent .bookCard.selected width
+   PADDING MATCHED: Side padding now matches top/bottom padding of parent card (10px) */
+.bookCard.selected .notes-form {
+  max-width: 500px;
+  width: 100%;
+  margin: 0;
+  padding: 0; /* No padding - use parent card's 10px padding */
+}
+
+/* Force the selected card to expand when notes form exists inside it */
+.bookCard.selected:has(.notes-form) {
+  width: 70%;
+  max-width: 500px;
+  padding: 10px; /* Explicit equal padding on all sides */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+.bookCard.selected .notes-input,
+.bookCard.selected .notes-buttons {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+/* Focus state inherited from .cosmic-input in shared-input-styles.css */
 
 .notes-input::placeholder {
   color: rgba(232, 244, 248, 0.6);
@@ -223,10 +260,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
   gap: 12px;
-  margin: 0 auto;
-  margin-left:50px;
+  width: 100%;
 }
 
 .save-notes-button {
@@ -235,15 +270,15 @@
   border: 1px solid rgba(37, 253, 217, 0.458);
   color: #31cafdec;
   border-radius: 8px;
-  padding: 8px 16px;
+  padding: 3px 9px;
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  width: 100px;
-  height: 40px;
+  width: 104px;
+  height: 26px;
   text-align: center;
   display: inline-block;
   white-space: nowrap;
@@ -263,15 +298,15 @@
   border: 1px solid rgba(185, 61, 11, 0.78);
   color: rgba(224, 209, 8, 0.642);
   border-radius: 8px;
-  padding: 8px 12px;
+  padding: 3px 9px;
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  width: 110px;
-  height: 40px;
+  width: 104px;
+  height: 26px;
   text-align: center;
   display: inline-block;
   white-space: nowrap;
@@ -335,11 +370,12 @@
   background: rgba(1, 5, 12, 0.95);
   border: 1px solid rgba(93, 180, 166, 0.721);
   border-radius: 10px;
-  padding: 20px;
-  max-width: 500px;
+  /* Size-only modal adjustments */
+  padding: 28px;
+  max-width: 860px;
   width: 90%;
   color: #E8F4F8;
-  font-family: 'Orbitron, sans-serif';
+  font-family: 'Orbitron', sans-serif;
   position: relative;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
