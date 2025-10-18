@@ -39,8 +39,7 @@
 .cosmic-input:focus {
   outline: none;
   border-color: rgba(7, 116, 218, 0.9);
-  box-shadow: 0 0 20px rgba(7, 116, 218, 0.5), inset 0 0 20px rgba(7, 116, 218, 0.1);
-  transform: translateY(-2px);
+ 
   background: 
     radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.4) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.25) 0%, transparent 50%),

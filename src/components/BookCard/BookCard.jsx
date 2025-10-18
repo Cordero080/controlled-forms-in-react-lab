@@ -52,13 +52,14 @@ const BookCard = ({ book, onDelete, isEditMode, isSelected, onSelect, onEdit }) 
               </button>
             </div>
           ) : (
-            <div className="notes-form">
+            <div className="notes-form" onClick={(e) => e.stopPropagation()}>
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                className="notes-input"
+                className="cosmic-input holographic-notes-bg notes-input"
                 placeholder="Add your notes about this book..."
                 rows="3"
+                autoFocus
               />
               <div className="notes-buttons">
                 <button className="save-notes-button" onClick={handleAddNotes}>Save</button>

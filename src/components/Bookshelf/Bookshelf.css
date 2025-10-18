@@ -57,10 +57,7 @@
   transition: all 0.3s ease-in-out; /* Smooth transitions */
 }
 
-.bookCard:hover {
-  z-index: 10; /* Bring the hovered card to the front */
-  transform: scale(1.5); /* Slight zoom effect */
-}
+
 
 .expandButton {
   margin-top: 5px;
@@ -194,89 +191,6 @@ select::after {
 select:hover::after {
   border-top-color: #ffffff;
   filter: drop-shadow(0 0 4px rgba(255, 179, 0, 0.8));
-}
-
-/* Specific styling for genre dropdown */
-.genre-dropdown {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  background: linear-gradient(135deg, rgba(10, 142, 199, 0.2), rgba(15, 82, 177, 0.2));
-  border: 2px solid rgba(7, 116, 218, 0.5);
-  border-radius: 8px;
-  color: #E8F4F8;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out, background 0.3s ease, filter 0.3s ease;
-  backdrop-filter: blur(10px);
-  position: relative;
-  overflow: hidden;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  padding-right: 40px;
-}
-
-/* Custom arrow for genre dropdown */
-.genre-dropdown::after {
-  content: '';
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 8px solid #E8F4F8;
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
-
-.genre-dropdown:hover {
-  border-color: rgba(7, 116, 218, 0.9);
-  box-shadow: 0 0 20px rgba(7, 116, 218, 0.5), inset 0 0 20px rgba(7, 116, 218, 0.1);
-  transform: translateY(-2px) scale(1.02);
-  background: linear-gradient(135deg, rgba(10, 142, 199, 0.4), rgba(15, 82, 177, 0.4));
-  filter: brightness(1.1);
-}
-
-.genre-dropdown:hover::after {
-  border-top-color: #ffffff;
-  filter: drop-shadow(0 0 6px rgba(7, 116, 218, 0.8)) drop-shadow(0 0 12px rgba(7, 116, 218, 0.6));
-}
-
-.genre-dropdown:focus {
-  outline: none;
-  border-color: #ffb300;
-  box-shadow: 0 0 25px rgba(255, 179, 0, 0.6);
-}
-
-.genre-dropdown option {
-  background: rgba(1, 5, 12, 0.9);
-  color: #E8F4F8;
-  padding: 10px;
-}
-
-.genre-tag {
-  display: inline-block;
-  background: linear-gradient(135deg, rgba(255, 179, 0, 0.3), rgba(255, 140, 0, 0.3));
-  color: #ffb300;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  margin-top: 8px;
-  border: 1px solid rgba(255, 179, 0, 0.5);
-  text-shadow: 0 0 5px rgba(255, 179, 0, 0.8);
-  transition: all 0.3s ease;
-}
-
-.genre-tag:hover {
-  background: linear-gradient(135deg, rgba(255, 179, 0, 0.5), rgba(255, 140, 0, 0.5));
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(255, 179, 0, 0.6);
 }
 
 /* Submit button styling - Ghost style */

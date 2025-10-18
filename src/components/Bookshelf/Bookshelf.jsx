@@ -147,7 +147,7 @@ const Bookshelf = () => {
           
           {/* BOOKSHELF DIV with dynamic className */}
           {/* Template literal allows conditional class: 'expanded' added when isExpanded=true */}
-          <div className={`bookshelfDiv ${isExpanded ? 'expanded' : ''}`}>
+          <div className={`bookshelfDiv ${isExpanded ? 'expanded' : ''} ${isEditMode ? 'edit-mode' : ''}`}>
             
             {/* ═══════════════════════════════════════════════════════════ */}
             {/* ARRAY MAPPING - Rendering Lists in React */}
