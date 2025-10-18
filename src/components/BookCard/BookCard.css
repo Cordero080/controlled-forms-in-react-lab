@@ -184,7 +184,8 @@
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  padding: 8px;
+  /* Tighten vertical padding to focus space on the input itself */
+  padding: 8px 0;
   width: 100%;
   box-sizing: border-box;
 }
@@ -196,17 +197,13 @@
   padding: 8px;
   color: #E8F4F8;
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.8rem;
-  height: 20px;
-  width: 300px;
-  margin-right:-2.5rem;
-  display: flex;
-  align-items: center;
-  align-content: center;
+  font-size: 0.9rem; /* Slightly larger for readability */
+  /* Size-only adjustments: make the textarea wider and taller by default */
+  width: 100%;
+  min-height: 160px;
+  display: block;
   box-sizing: border-box;
   resize: vertical;
-  min-height: 80px;
-  text-align: center;
 }
 
 .notes-input:focus {
@@ -335,8 +332,9 @@
   background: rgba(1, 5, 12, 0.95);
   border: 1px solid rgba(93, 180, 166, 0.721);
   border-radius: 10px;
-  padding: 20px;
-  max-width: 500px;
+  /* Size-only modal adjustments */
+  padding: 28px;
+  max-width: 860px;
   width: 90%;
   color: #E8F4F8;
   font-family: 'Orbitron, sans-serif';
