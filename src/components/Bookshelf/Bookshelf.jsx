@@ -41,31 +41,59 @@ const Bookshelf = () => {
   // Stores all books as an array of objects
   // ANALOGY: Like a list of index cards, each card has title & author
   const [books, setBooks] = useState([
-    { 
-      title: 'The Brothers Karamazov', 
-      author: 'Fyodor Dostoyevsky',
-      genre: 'Literary Fiction'
-    },
-    {
-      title:'Zen and the Art of Motorcycle Maintenance',
-      author: 'Gary Zukav',
-      genre: 'Philosophy'
-    },
-    {
-      title: 'The Lone Samurai',
-      author: 'William Scott Wilson',
-      genre: 'Biography'
-    },
-    {
-      title: 'In my Own Way',
-      author: 'Alan Watts',
-      genre: 'Philosophy'
-    },
-    {
-      title: 'The Book of Five Rings',
-      author: 'Musashi Miyamoto',
-      genre: 'Martial Arts'
-    },
+    // FICTION (20)
+    { title: 'The Brothers Karamazov', author: 'Fyodor Dostoevsky', genre: 'Literary Fiction' },
+    { title: 'One Hundred Years of Solitude', author: 'Gabriel García Márquez', genre: 'Literary Fiction' },
+    { title: 'Moby-Dick', author: 'Herman Melville', genre: 'Literary Fiction' },
+    { title: 'Beloved', author: 'Toni Morrison', genre: 'Literary Fiction' },
+    { title: 'Don Quixote', author: 'Miguel de Cervantes', genre: 'Literary Fiction' },
+    { title: 'Invisible Man', author: 'Ralph Ellison', genre: 'Literary Fiction' },
+    { title: 'To the Lighthouse', author: 'Virginia Woolf', genre: 'Literary Fiction' },
+    { title: 'Blood Meridian', author: 'Cormac McCarthy', genre: 'Literary Fiction' },
+    { title: 'The Sound and the Fury', author: 'William Faulkner', genre: 'Literary Fiction' },
+    { title: 'Catch-22', author: 'Joseph Heller', genre: 'Literary Fiction' },
+    { title: 'Crime and Punishment', author: 'Fyodor Dostoevsky', genre: 'Literary Fiction' },
+    { title: 'Middlemarch', author: 'George Eliot', genre: 'Literary Fiction' },
+    { title: 'The Tale of Genji', author: 'Murasaki Shikibu', genre: 'Literary Fiction' },
+    { title: "Gravity's Rainbow", author: 'Thomas Pynchon', genre: 'Literary Fiction' },
+    { title: 'Anna Karenina', author: 'Leo Tolstoy', genre: 'Literary Fiction' },
+    { title: 'Ulysses', author: 'James Joyce', genre: 'Literary Fiction' },
+    { title: 'The Stranger', author: 'Albert Camus', genre: 'Literary Fiction' },
+    { title: 'Infinite Jest', author: 'David Foster Wallace', genre: 'Literary Fiction' },
+    { title: 'Things Fall Apart', author: 'Chinua Achebe', genre: 'Literary Fiction' },
+    { title: '2666', author: 'Roberto Bolaño', genre: 'Literary Fiction' },
+    // PHILOSOPHY (15)
+    { title: 'Meditations', author: 'Marcus Aurelius', genre: 'Philosophy' },
+    { title: 'The Republic', author: 'Plato', genre: 'Philosophy' },
+    { title: 'Nicomachean Ethics', author: 'Aristotle', genre: 'Philosophy' },
+    { title: 'Beyond Good and Evil', author: 'Friedrich Nietzsche', genre: 'Philosophy' },
+    { title: 'Being and Time', author: 'Martin Heidegger', genre: 'Philosophy' },
+    { title: 'The Genealogy of Morals', author: 'Friedrich Nietzsche', genre: 'Philosophy' },
+    { title: 'Critique of Pure Reason', author: 'Immanuel Kant', genre: 'Philosophy' },
+    { title: 'Tao Te Ching', author: 'Lao Tzu', genre: 'Philosophy' },
+    { title: 'The Phenomenology of Spirit', author: 'G.W.F. Hegel', genre: 'Philosophy' },
+    { title: 'Either/Or', author: 'Søren Kierkegaard', genre: 'Philosophy' },
+    { title: 'The Second Sex', author: 'Simone de Beauvoir', genre: 'Philosophy' },
+    { title: 'The Gay Science', author: 'Friedrich Nietzsche', genre: 'Philosophy' },
+    { title: 'Discipline and Punish', author: 'Michel Foucault', genre: 'Philosophy' },
+    { title: 'Thus Spoke Zarathustra', author: 'Friedrich Nietzsche', genre: 'Philosophy' },
+    { title: 'The Problems of Philosophy', author: 'Bertrand Russell', genre: 'Philosophy' },
+    // NON-FICTION (15)
+    { title: 'Sapiens', author: 'Yuval Noah Harari', genre: 'Non-Fiction' },
+    { title: 'The Denial of Death', author: 'Ernest Becker', genre: 'Non-Fiction' },
+    { title: 'The Origin of Species', author: 'Charles Darwin', genre: 'Non-Fiction' },
+    { title: 'The Autobiography of Malcolm X', author: 'Malcolm X & Alex Haley', genre: 'Non-Fiction' },
+    { title: 'Guns, Germs, and Steel', author: 'Jared Diamond', genre: 'Non-Fiction' },
+    { title: "Man's Search for Meaning", author: 'Viktor Frankl', genre: 'Non-Fiction' },
+    { title: 'The Structure of Scientific Revolutions', author: 'Thomas Kuhn', genre: 'Non-Fiction' },
+    { title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', genre: 'Non-Fiction' },
+    { title: 'The Souls of Black Folk', author: 'W.E.B. Du Bois', genre: 'Non-Fiction' },
+    { title: 'A Brief History of Time', author: 'Stephen Hawking', genre: 'Non-Fiction' },
+    { title: 'The Power Broker', author: 'Robert Caro', genre: 'Non-Fiction' },
+    { title: 'The Warmth of Other Suns', author: 'Isabel Wilkerson', genre: 'Non-Fiction' },
+    { title: 'The Guns of August', author: 'Barbara Tuchman', genre: 'Non-Fiction' },
+    { title: 'The Emperor of All Maladies', author: 'Siddhartha Mukherjee', genre: 'Non-Fiction' },
+    { title: 'The Wright Brothers', author: 'David McCullough', genre: 'Non-Fiction' },
   ]);
 
   // 👁️ VISIBILITY TOGGLES
@@ -112,6 +140,14 @@ const Bookshelf = () => {
     setSelectedBookIndex(index);
   };
 
+  // Handle clicking outside of cards to deselect (while staying in edit mode)
+  const handleBackgroundClick = (e) => {
+    // Only deselect if in edit mode, a book is selected, and clicked on background
+    if (isEditMode && selectedBookIndex !== null && e.target === e.currentTarget) {
+      setSelectedBookIndex(null);
+    }
+  };
+
   // ═══════════════════════════════════════════════════════════════════════════
   // 3. JSX RETURN - The Component's Visual Structure
   // ═══════════════════════════════════════════════════════════════════════════
@@ -147,7 +183,10 @@ const Bookshelf = () => {
           
           {/* BOOKSHELF DIV with dynamic className */}
           {/* Template literal allows conditional class: 'expanded' added when isExpanded=true */}
-          <div className={`bookshelfDiv ${isExpanded ? 'expanded' : ''} ${isEditMode ? 'edit-mode' : ''}`}>
+          <div 
+            className={`bookshelfDiv ${isExpanded ? 'expanded' : ''} ${isEditMode ? 'edit-mode' : ''}`}
+            onClick={handleBackgroundClick}
+          >
             
             {/* ═══════════════════════════════════════════════════════════ */}
             {/* ARRAY MAPPING - Rendering Lists in React */}
@@ -160,6 +199,7 @@ const Bookshelf = () => {
                 onDelete={() => handleBookDelete(index)}
                 isEditMode={isEditMode}
                 isSelected={selectedBookIndex === index}
+                hasSelection={selectedBookIndex !== null}
                 onSelect={() => handleBookSelect(index)}
                 onEdit={(updatedBook) => handleBookEdit(index, updatedBook)}
               />
@@ -173,20 +213,30 @@ const Bookshelf = () => {
           >
             {isExpanded ? 'Collapse ▲' : 'Expand ▼'}
           </button>
-          
-          {/* EDIT MODE TOGGLE BUTTON */}
-          <button 
-            onClick={() => {
-              setIsEditMode(!isEditMode);
-              if (isEditMode) {
-                setSelectedBookIndex(null); // Reset selection when exiting edit mode
-              }
-            }} 
-            className="editButton"
-          >
-            {isEditMode ? 'exit' : 'edit'}
-          </button>
         </div>
+      )}
+      
+      {/* FLOATING EDIT BUTTON - shows on right when not in edit mode and bookshelf is visible */}
+      {isBookshelfVisible && !isEditMode && (
+        <button 
+          onClick={() => setIsEditMode(true)} 
+          className="editButton floating-right"
+        >
+          ✎ EDIT
+        </button>
+      )}
+      
+      {/* FLOATING EXIT BUTTON - shows on right when in edit mode */}
+      {isEditMode && (
+        <button 
+          onClick={() => {
+            setIsEditMode(false);
+            setSelectedBookIndex(null);
+          }} 
+          className="editButton floating-right exit"
+        >
+          ✕ EXIT
+        </button>
       )}
       
       {/* ─────────────────────────────────────────────────────────────────── */}

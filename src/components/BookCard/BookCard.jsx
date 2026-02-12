@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import './BookCard.css';
 
 /*
@@ -10,7 +11,7 @@ import './BookCard.css';
 ╚══════════════════════════════════════════════════════════════════════════════╝
 */
 
-const BookCard = ({ book, onDelete, isEditMode, isSelected, onSelect, onEdit }) => {
+const BookCard = ({ book, onDelete, isEditMode, isSelected, hasSelection, onSelect, onEdit }) => {
   /*
    * PROPS: Data passed down from parent component
    * ANALOGY: Like receiving a filled-out library card
@@ -18,6 +19,7 @@ const BookCard = ({ book, onDelete, isEditMode, isSelected, onSelect, onEdit }) 
    * - onDelete: Function to delete this book
    * - isEditMode: Boolean indicating if edit mode is active
    * - isSelected: Boolean indicating if this book is selected for editing
+   * - hasSelection: Boolean indicating if any book is currently selected
    * - onSelect: Function to select this book for editing
    * - onEdit: Function to save edited book data
    */
@@ -25,6 +27,16 @@ const BookCard = ({ book, onDelete, isEditMode, isSelected, onSelect, onEdit }) 
   const [notes, setNotes] = useState(book.notes || '');
   const [showNotesInput, setShowNotesInput] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+
+  // Add/remove body class when notes modal is open to blur background
+  useEffect(() => {
+    if (showNotesInput) {
+      document.body.classList.add('notes-modal-open');
+    } else {
+      document.body.classList.remove('notes-modal-open');
+    }
+    return () => document.body.classList.remove('notes-modal-open');
+  }, [showNotesInput]);
 
   const handleAddNotes = () => {
     onEdit({
@@ -35,12 +47,33 @@ const BookCard = ({ book, onDelete, isEditMode, isSelected, onSelect, onEdit }) 
   };
 
   // Determine the CSS class based on state
-  const cardClass = `bookCard ${isEditMode ? 'edit-mode' : ''} ${isSelected ? 'selected' : ''}`;
+  // Show edit-mode highlight only when: in edit mode AND (no selection yet OR this card is selected)
+  const showEditHighlight = isEditMode && (!hasSelection || isSelected);
+  const cardClass = `bookCard ${showEditHighlight ? 'edit-mode' : ''} ${isSelected ? 'selected' : ''}`;
+
+  // Handle card click - select card and stop propagation to prevent deselect
+  const handleCardClick = (e) => {
+    e.stopPropagation(); // Prevent click from bubbling to background
+    if (isEditMode && !isSelected) {
+      onSelect();
+    }
+  };
 
   return (
-    <div className={cardClass} onClick={isEditMode && !isSelected ? onSelect : undefined}>
+    <div className={cardClass} onClick={handleCardClick}>
       
-      {isSelected ? (
+      {/* Always show book info */}
+      {book.title && <h3>{book.title}</h3>}
+      {book.author && <p>{book.author}</p>}
+      {book.genre && !showNotesInput && <span className="genre-tag">{book.genre}</span>}
+      
+      {/* Show View link only when NOT selected */}
+      {!isSelected && book.title && book.author && book.genre && (
+        <button className="view-link" onClick={() => setShowDetails(true)}>View</button>
+      )}
+
+      {/* Show edit options when selected */}
+      {isSelected && (
         <div className="edit-form">
           {!showNotesInput ? (
             <div className="edit-options">
@@ -52,32 +85,30 @@ const BookCard = ({ book, onDelete, isEditMode, isSelected, onSelect, onEdit }) 
               </button>
             </div>
           ) : (
-            <div className="notes-form" onClick={(e) => e.stopPropagation()}>
-              <h3 className="notes-book-title">{book.title}</h3>
-              <textarea
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                className="cosmic-input holographic-notes-bg notes-input"
-                placeholder="Add your notes about this book..."
-                rows="3"
-                autoFocus
-              />
-              <div className="notes-buttons">
-                <button className="save-notes-button" onClick={handleAddNotes}>Save</button>
-                <button className="cancel-notes-button" onClick={() => setShowNotesInput(false)}>Cancel</button>
-              </div>
-            </div>
+            createPortal(
+              <div className="notes-modal-portal">
+                <div className="notes-backdrop" onClick={() => setShowNotesInput(false)} />
+                <div className="notes-form-container" onClick={(e) => e.stopPropagation()}>
+                  <h3 className="notes-book-title">{book.title}</h3>
+                  <p className="notes-book-author">{book.author}</p>
+                  <textarea
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                    className="cosmic-input holographic-notes-bg notes-input"
+                    placeholder="Add your notes about this book..."
+                    rows="3"
+                    autoFocus
+                  />
+                  <div className="notes-buttons">
+                    <button className="save-notes-button" onClick={handleAddNotes}>Save</button>
+                    <button className="cancel-notes-button" onClick={() => setShowNotesInput(false)}>Cancel</button>
+                  </div>
+                </div>
+              </div>,
+              document.body
+            )
           )}
         </div>
-      ) : (
-        <>
-          {book.title && <h3>{book.title}</h3>}
-          {book.author && <p>{book.author}</p>}
-          {book.genre && <span className="genre-tag">{book.genre}</span>}
-          {book.title && book.author && book.genre && (
-            <button className="view-link" onClick={() => setShowDetails(true)}>View</button>
-          )}
-        </>
       )}
 
       {showDetails && (

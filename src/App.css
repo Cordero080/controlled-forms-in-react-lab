@@ -3,7 +3,12 @@
   src: url('/fonts/Neuropol.ttf') format('truetype');
 }
 
-
+/* Blur everything when notes modal is open */
+body.notes-modal-open .title,
+body.notes-modal-open .geometric-bg {
+  filter: blur(8px);
+  transition: filter 0.3s ease;
+}
 
 
 /* APP.CSS - Add these styles
@@ -11,7 +16,7 @@
 
 /* Wrapper to center everything */
 .title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Rajdhani', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,12 +31,12 @@
   position: static; /* Allow child elements to move freely */
   width: 90%;
   
-  max-width: 650px;
+  max-width: 490px;
   margin: 0 auto;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 2vw;
+  gap: 1.5vw;
   align-items: center;
 }
 
@@ -42,10 +47,10 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 1vw;
+  gap: 0.75vw;
   width: 120%; /* Increased the width of the div */
   transform: translateX(-8%); /* Shift the div slightly to the left */
-  padding: 1.5vw 2vw;
+  padding: 1.1vw 1.5vw;
   background: rgba(15, 30, 55, 0.25);
   border-radius: 12px;
   border: 1px solid rgba(93, 180, 166, 0.15);
@@ -56,22 +61,14 @@
   transition: all 0.4s ease;
 }
 
-.bookshelfDiv:not(.edit-mode):hover {
-  background: rgba(43, 94, 182, 0.3);
-  border-color: rgba(93, 180, 166, 0.25);
-  box-shadow: 
-    0 6px 24px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
 /* Individual Book Card - minimal and readable */
 .bookCard {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Rajdhani', sans-serif;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 1.2vw 1.5vw;
+  padding: 0.9vw 1.1vw;
   background: rgba(20, 35, 60, 0.4);
   border-radius: 6px;
   border-left: 2px solid rgba(93, 180, 166, 0.3);
@@ -98,11 +95,11 @@
 
 /* Book Card Title - clean and readable */
 .bookCard h3 {
- font-family: 'Orbitron', sans-serif;
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
+ font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
   
   color: rgba(93, 213, 226, 0.95);
-  margin: 0 0 0.4vw 0;
+  margin: 0 0 0.3vw 0;
   letter-spacing: 0.03em;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   transition: all 0.3s;
@@ -120,8 +117,8 @@
 
 /* Book Card Author - subtle and elegant */
 .bookCard p {
-  font-family: 'Orbitron', sans-serif;
-  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(0.7rem, 1.1vw, 0.8rem);
   font-style: italic;
   color: rgba(168, 213, 226, 0.75);
   margin: 0;
@@ -133,8 +130,14 @@
 }
 
 .bookCard:hover p {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Rajdhani', sans-serif;
   color: rgba(235, 226, 128, 0.9);
+}
+
+/* Center title and author when notes form is visible */
+.bookCard:has(.notes-form) h3,
+.bookCard:has(.notes-form) p {
+  text-align: center;
 }
 
 /* Form container - subtle glass effect */
@@ -142,7 +145,7 @@
   
   position: relative;
   width: 100%;
-  padding: 2vw 2.5vw;
+  padding: 1.5vw 1.9vw;
   background: rgba(15, 30, 55, 0.3);
   border-radius: 12px;
   border: 1px solid rgba(93, 180, 166, 0.2);
@@ -164,16 +167,16 @@
 }
 
 .formDiv form {
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 /* Form heading */
 .formDiv h3.add-book {
   
   font-family: 'Dune_rise', sans-serif;
-  font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+  font-size: clamp(1rem, 1.7vw, 1.2rem);
   letter-spacing: 0.08em;
-  margin: 0 0 1.5vw 0;
+  margin: 0 0 1.1vw 0;
   color: rgba(93, 213, 226, 0.9);
   text-shadow: 0 0 8px rgba(93, 180, 166, 0.3);
   text-transform: uppercase;

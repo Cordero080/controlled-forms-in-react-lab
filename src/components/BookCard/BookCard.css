@@ -11,12 +11,12 @@
 .bookCard {
   background: rgba(19, 90, 212, 0.338);
   border: 1px solid rgba(93, 180, 166, 0.721);
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   text-align: center;
   color: #E8F4F8;
-  font-family: 'Orbitron, sans-serif';
+  font-family: 'Rajdhani', sans-serif;
   position: relative; /* Ensure proper stacking context */
   z-index: 1; /* Default stacking order */
   transition: all 0.3s ease-in-out; /* Smooth transitions */
@@ -26,35 +26,36 @@
 /* Edit mode - all books become selectable with glowing border */
 .bookCard.edit-mode {
   border: 2px solid rgba(255, 179, 0, 0.8);
-  box-shadow: 0 0 15px rgba(255, 179, 0, 0.4);
+  box-shadow: 0 0 12px rgba(255, 179, 0, 0.4);
   cursor: pointer;
 }
 
 /* Selected book - thicker border, different color, expanded */
 .bookCard.selected {
   border: 1px solid rgba(82, 254, 165, 0.623);
-  box-shadow: 0 0 20px rgba(77, 76, 131, 0.358);
+  box-shadow: 0 0 15px rgba(77, 76, 131, 0.358);
   transform: none;
   grid-column: 1 / -1;
   width: 38%; /* Smaller initial width for compact button display */
-  max-width: 380px;
+  max-width: 285px;
   margin: 0 auto;
-  z-index: 10;
+  z-index: 100;
+  position: relative;
   cursor: default;
   filter: brightness(1.1);
 }
 
 .delete-button {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 4px;
+  right: 4px;
   background: rgba(220, 53, 69, 0.8);
   color: white;
   border: none;
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  font-size: 16px;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
   font-weight: bold;
   cursor: pointer;
   display: flex;
@@ -75,19 +76,19 @@
   flex-direction: column;
   align-items: center; /* Center children horizontally */
   justify-content: flex-end; /* Push content to bottom */
-  gap: 8px;
+  gap: 6px;
   width: 100%;
-  min-height: 50px; /* Reduced minimum height */
+  min-height: 38px; /* Reduced minimum height */
 }
 
 .edit-input, .edit-select {
   background: rgba(219, 11, 11, 0.1);
   border: 1px solid rgba(93, 180, 166, 0.5);
-  border-radius: 5px;
-  padding: 6px 8px;
+  border-radius: 4px;
+  padding: 5px 6px;
   color: #E8F4F8;
-  font-family: 'Orbitron, sans-serif';
-  font-size: 0.9rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.7rem;
   width: 100%;
   box-sizing: border-box;
 }
@@ -106,14 +107,14 @@
   background: linear-gradient(135deg, rgba(40, 167, 69, 0.8), rgba(34, 197, 94, 0.8));
   color: white;
   border: none;
-  border-radius: 5px;
-  padding: 6px 12px;
-  font-family: 'Orbitron, sans-serif';
-  font-size: 0.8rem;
+  border-radius: 4px;
+  padding: 5px 9px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.6rem;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
 .save-button:hover {
@@ -128,31 +129,31 @@
   display: inline-block;
   background: linear-gradient(135deg, rgba(255, 179, 0, 0.3), rgba(255, 140, 0, 0.3));
   color: #ffb300;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.8rem;
+  padding: 3px 6px;
+  border-radius: 9px;
+  font-size: 0.6rem;
   font-weight: bold;
-  margin-top: 8px;
+  margin-top: 6px;
   border: 1px solid rgba(255, 179, 0, 0.5);
-  text-shadow: 0 0 5px rgba(255, 179, 0, 0.8);
+  text-shadow: 0 0 4px rgba(255, 179, 0, 0.8);
   transition: all 0.3s ease;
 }
 
 .genre-tag:hover {
   background: linear-gradient(135deg, rgba(255, 179, 0, 0.5), rgba(255, 140, 0, 0.5));
   transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(255, 179, 0, 0.6);
+  box-shadow: 0 0 8px rgba(255, 179, 0, 0.6);
 }
 
 .edit-options {
   display: flex;
   justify-content: center; /* Center the remove and notes buttons within the edit section */
   align-items: center;
-  gap: 12px;
+  gap: 9px;
   flex-wrap: wrap;
   width: 100%;
-  margin: 0 auto 8px; /* No top margin, 8px bottom margin */
-  padding: 0 0 0 20px; /* Removed top/bottom padding, kept left padding to shift buttons right */
+  margin: 0 auto 6px; /* No top margin, 8px bottom margin */
+  padding: 0 0 0 15px; /* Removed top/bottom padding, kept left padding to shift buttons right */
 }
 
 .option-button {
@@ -160,15 +161,15 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(93, 180, 166, 0.3);
   color: #E8F4F8;
-  border-radius: 8px;
-  padding: 6px 16px;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.8rem;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.6rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  min-width: 100px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  min-width: 75px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -197,67 +198,100 @@
 .notes-form {
   display: flex;
   flex-direction: column;
-  align-items: stretch; /* Stretch items to full width */
-  gap: 12px;
+  align-items: stretch;
+  gap: 9px;
   padding: 0;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
 }
 
-/* Book title in notes form */
+/* Blur backdrop for notes form */
+.notes-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9998;
+}
+
+/* Portal container for notes modal */
+.notes-modal-portal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Notes form container - rendered via portal */
+.notes-form-container {
+  position: relative;
+  z-index: 10000;
+  background: rgba(15, 30, 55, 0.95);
+  border: 1px solid rgba(93, 180, 166, 0.6);
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 0 40px rgba(0, 191, 255, 0.3);
+}
+
 .notes-book-title {
   color: #E8F4F8;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.2rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.5rem;
   text-align: center;
-  margin: 0 auto 8px auto;
-  width: 100%;
-  text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
-  align-self: center;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
+}
+
+.notes-book-author {
+  color: rgba(232, 244, 248, 0.7);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  margin: 0 0 10px 0;
 }
 
 /* Notes textarea - inherits cosmic-input base styles from shared file */
 .notes-input.cosmic-input {
   width: 100%;
   resize: vertical;
-  min-height: 336px;
-  text-align: center;
-  font-size: 1.08rem !important; /* Increased font size by 20% */
+  min-height: 250px;
+  text-align: left;
+  font-size: 1rem !important;
 }
 
 .bookCard.selected .edit-form {
-  align-items: center; /* Center the edit-options buttons */
+  align-items: center;
   width: 100%;
 }
 
-/* Notes form expands wider when user clicks "+ Notes" button 
-   ADJUSTED: Increases card width when notes form is shown so it stays expanded during typing
-   This overrides the parent .bookCard.selected width */
+/* Notes form expands wider when user clicks "+ Notes" button */
 .bookCard.selected .notes-form {
-  align-items: center; /* Center all children including title and textarea */
+  align-items: center;
   max-width: 800px;
   width: 100%;
-  margin: 0 100px !important; /* 100px margin on left and right */
-  padding: 0; /* No padding - use parent card's 10px padding */
-}
-
-/* Force the selected card to expand when notes form exists inside it */
-.bookCard.selected:has(.notes-form) {
-  width: 95%;
-  max-width: 850px;
-  padding: 30px 30px 15px 30px; /* Top 30px, right 8px, bottom 20px, left 8px */
-  box-sizing: border-box; /* Include padding and border in width calculation */
-  transform: translateY(-50px); /* Move up to center when notes form is visible */
+  margin: 0 50px !important;
+  padding: 0;
 }
 
 .bookCard.selected .notes-input,
 .bookCard.selected .notes-buttons {
   max-width: none;
   width: 100%;
-  box-sizing: border-box; /* Ensure padding is included in width */
+  box-sizing: border-box;
 }
-
-/* Focus state inherited from .cosmic-input in shared-input-styles.css */
 
 .notes-input::placeholder {
   color: rgba(232, 244, 248, 0.6);
@@ -267,7 +301,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 9px;
   width: 100%;
 }
 
@@ -276,16 +310,16 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(37, 253, 217, 0.458);
   color: #31cafd;
-  border-radius: 8px;
-  padding: 3px 9px;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.7rem;
+  border-radius: 6px;
+  padding: 2px 7px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.55rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  width: 104px;
-  height: 26px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  width: 78px;
+  height: 20px;
   text-align: center;
   display: inline-block;
   white-space: nowrap;
@@ -304,16 +338,16 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(185, 61, 11, 0.78);
   color: rgba(224, 210, 8, 0.671);
-  border-radius: 8px;
-  padding: 3px 9px;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.7rem;
+  border-radius: 6px;
+  padding: 2px 7px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.55rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  width: 104px;
-  height: 26px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  width: 78px;
+  height: 20px;
   text-align: center;
   display: inline-block;
   white-space: nowrap;
@@ -329,13 +363,13 @@
 }
 
 .book-notes {
-  margin-top: 8px;
-  padding-top: 8px;
+  margin-top: 6px;
+  padding-top: 6px;
   border-top: 1px solid rgba(93, 180, 166, 0.3);
 }
 
 .notes-preview {
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   color: rgba(232, 244, 248, 0.8);
   font-style: italic;
   line-height: 1.4;
@@ -346,11 +380,11 @@
   background: none;
   border: none;
   color: rgba(93, 180, 166, 0.8);
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.8rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.6rem;
   cursor: pointer;
   text-decoration: underline;
-  margin-top: 8px;
+  margin-top: 6px;
   padding: 0;
   transition: color 0.3s ease;
 }
@@ -376,29 +410,29 @@
 .book-details-content {
   background: rgba(1, 5, 12, 0.95);
   border: 1px solid rgba(93, 180, 166, 0.721);
-  border-radius: 10px;
+  border-radius: 8px;
   /* Size-only modal adjustments */
-  padding: 28px;
-  max-width: 860px;
+  padding: 21px;
+  max-width: 645px;
   width: 90%;
   color: #E8F4F8;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Rajdhani', sans-serif;
   position: relative;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
 }
 
 .close-modal {
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: 8px;
+  right: 12px;
   background: none;
   border: none;
   color: #E8F4F8;
-  font-size: 24px;
+  font-size: 18px;
   cursor: pointer;
   padding: 0;
-  width: 30px;
-  height: 30px;
+  width: 23px;
+  height: 23px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -410,9 +444,9 @@
 }
 
 .plus-sign {
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   font-weight: bold;
   margin-right: 1px;
   line-height: .3;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
 }
