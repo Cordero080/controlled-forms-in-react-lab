@@ -1,8 +1,9 @@
+<div align="center">
 # 📚 Quantum Literary Bookshelf
 
 > A React bookshelf application featuring an animated quantum particle system where words decompose, transform, and recombine - visualizing language as living consciousness.
 
----
+</div>
 
 ## 🌌 The Concept
 

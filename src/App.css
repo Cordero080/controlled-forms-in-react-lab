@@ -1,3 +1,9 @@
+/* Blur everything when details modal is open */
+body.details-modal-open .title,
+body.details-modal-open .geometric-bg {
+  filter: blur(8px);
+  transition: filter 0.3s ease;
+}
 @font-face {
   font-family: 'Neuropol';
   src: url('/fonts/Neuropol.ttf') format('truetype');
@@ -101,7 +107,6 @@ body.notes-modal-open .geometric-bg {
   color: rgba(93, 213, 226, 0.95);
   margin: 0 0 0.3vw 0;
   letter-spacing: 0.03em;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   transition: all 0.3s;
   line-height: 1.4;
   text-align: left;
@@ -110,9 +115,6 @@ body.notes-modal-open .geometric-bg {
 
 .bookCard:hover h3 {
   color: rgb(5, 188, 208);
-  text-shadow: 
-    0 0 8px rgba(93, 180, 166, 0.3),
-    0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* Book Card Author - subtle and elegant */
@@ -178,7 +180,6 @@ body.notes-modal-open .geometric-bg {
   letter-spacing: 0.08em;
   margin: 0 0 1.1vw 0;
   color: rgba(93, 213, 226, 0.9);
-  text-shadow: 0 0 8px rgba(93, 180, 166, 0.3);
   text-transform: uppercase;
   font-weight: 700;
   text-align: center;

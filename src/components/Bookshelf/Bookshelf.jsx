@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BookCard from '../BookCard/BookCard';
 import BookForm from '../BookForm/BookForm';
 import ToggleButton from '../ToggleButton/ToggleButton';
@@ -105,6 +105,34 @@ const Bookshelf = () => {
   const [isEditMode, setIsEditMode] = useState(false);            // Edit mode starts disabled
   const [selectedBookIndex, setSelectedBookIndex] = useState(null); // Index of selected book for editing
 
+  // 🔍 SEARCH & FILTER STATE
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeGenre, setActiveGenre] = useState('All');
+
+  // Get unique genres from books
+  const genres = ['All', ...new Set(books.map(book => book.genre))];
+
+  // Filter books by search query and genre
+  const filteredBooks = books.filter(book => {
+    const matchesSearch = searchQuery === '' || 
+      book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      book.author.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesGenre = activeGenre === 'All' || book.genre === activeGenre;
+    return matchesSearch && matchesGenre;
+  });
+
+  // Listen for cancelEditMode event to exit edit mode from BookCard
+  useEffect(() => {
+    const handleCancelEditMode = () => {
+      setIsEditMode(false);
+      setSelectedBookIndex(null);
+    };
+    window.addEventListener('cancelEditMode', handleCancelEditMode);
+    return () => {
+      window.removeEventListener('cancelEditMode', handleCancelEditMode);
+    };
+  }, []);
+
   // ═══════════════════════════════════════════════════════════════════════════
   // 2. EVENT HANDLER FUNCTIONS - The Component's Behaviors
   // ═══════════════════════════════════════════════════════════════════════════
@@ -179,7 +207,34 @@ const Bookshelf = () => {
         <div>
           
           {/* SUBTITLE AT TOP OF BOOKSHELF */}
-          <p className="exit-subtitle">unveil the bookshelf</p>
+        
+
+          {/* 🔍 SEARCH BAR */}
+          <div className="search-container">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search by title or author..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <button className="clear-search" onClick={() => setSearchQuery('')}>×</button>
+            )}
+          </div>
+
+          {/* 📚 GENRE TABS */}
+          <div className="genre-tabs">
+            {genres.map(genre => (
+              <button
+                key={genre}
+                className={`genre-tab ${activeGenre === genre ? 'active' : ''}`}
+                onClick={() => setActiveGenre(genre)}
+              >
+                {genre}
+              </button>
+            ))}
+          </div>
           
           {/* BOOKSHELF DIV with dynamic className */}
           {/* Template literal allows conditional class: 'expanded' added when isExpanded=true */}
@@ -192,18 +247,26 @@ const Bookshelf = () => {
             {/* ARRAY MAPPING - Rendering Lists in React */}
             {/* ═══════════════════════════════════════════════════════════ */}
 
-            {books.map((book, index) => (
-              <BookCard 
-                key={index} 
-                book={book} 
-                onDelete={() => handleBookDelete(index)}
-                isEditMode={isEditMode}
-                isSelected={selectedBookIndex === index}
-                hasSelection={selectedBookIndex !== null}
-                onSelect={() => handleBookSelect(index)}
-                onEdit={(updatedBook) => handleBookEdit(index, updatedBook)}
-              />
-            ))}
+            {filteredBooks.length > 0 ? (
+              filteredBooks.map((book) => {
+                // Find original index for proper editing/deleting
+                const originalIndex = books.findIndex(b => b.title === book.title && b.author === book.author);
+                return (
+                  <BookCard 
+                    key={originalIndex} 
+                    book={book} 
+                    onDelete={() => handleBookDelete(originalIndex)}
+                    isEditMode={isEditMode}
+                    isSelected={selectedBookIndex === originalIndex}
+                    hasSelection={selectedBookIndex !== null}
+                    onSelect={() => handleBookSelect(originalIndex)}
+                    onEdit={(updatedBook) => handleBookEdit(originalIndex, updatedBook)}
+                  />
+                );
+              })
+            ) : (
+              <p className="no-results">No books found matching your search.</p>
+            )}
           </div>
           
           {/* EXPAND/COLLAPSE BUTTON */}
@@ -216,20 +279,11 @@ const Bookshelf = () => {
         </div>
       )}
       
-      {/* FLOATING EDIT BUTTON - shows on right when not in edit mode and bookshelf is visible */}
-      {isBookshelfVisible && !isEditMode && (
-        <button 
-          onClick={() => setIsEditMode(true)} 
-          className="editButton floating-right"
-        >
-          ✎ EDIT
-        </button>
-      )}
-      
-      {/* FLOATING EXIT BUTTON - shows on right when in edit mode */}
-      {isEditMode && (
+      {/* FLOATING EXIT BUTTON - shows on right when bookshelf is visible to close it */}
+      {isBookshelfVisible && (
         <button 
           onClick={() => {
+            setIsBookshelfVisible(false);
             setIsEditMode(false);
             setSelectedBookIndex(null);
           }} 

@@ -27,9 +27,6 @@ h1 {
   padding: 0 4vw;
   padding-top: 2rem;
   text-transform: uppercase;
-  text-shadow: 
-    0 0 10px rgba(93, 180, 166, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* "MY" span styling */
@@ -41,9 +38,6 @@ h1 {
   letter-spacing: 0.4em;
   color: rgba(167, 111, 194, 0.7);
   font-weight: 400;
-  text-shadow: 
-    0 0 8px rgba(167, 111, 194, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Form elements */
@@ -69,7 +63,6 @@ label {
   color: rgba(93, 180, 166, 0.7);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  text-shadow: 0 0 5px rgba(93, 180, 166, 0.2);
   transition: all 0.3s;
 }
 
@@ -130,7 +123,6 @@ button {
   box-shadow: 
     0 2px 8px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  text-shadow: 0 0 5px rgba(93, 180, 166, 0.3);
 }
 
 button:hover {
@@ -141,7 +133,6 @@ button:hover {
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   transform: translateY(-1px);
   color: rgba(93, 213, 226, 1);
-  text-shadow: 0 0 8px rgba(93, 180, 166, 0.5);
 }
 
 button:active {

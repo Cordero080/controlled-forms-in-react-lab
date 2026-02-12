@@ -28,6 +28,16 @@ const BookCard = ({ book, onDelete, isEditMode, isSelected, hasSelection, onSele
   const [showNotesInput, setShowNotesInput] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
 
+  // Blur background when book details modal is open
+  useEffect(() => {
+    if (showDetails) {
+      document.body.classList.add('details-modal-open');
+    } else {
+      document.body.classList.remove('details-modal-open');
+    }
+    return () => document.body.classList.remove('details-modal-open');
+  }, [showDetails]);
+
   // Add/remove body class when notes modal is open to blur background
   useEffect(() => {
     if (showNotesInput) {
@@ -61,36 +71,43 @@ const BookCard = ({ book, onDelete, isEditMode, isSelected, hasSelection, onSele
 
   return (
     <div className={cardClass} onClick={handleCardClick}>
-      
       {/* Always show book info */}
       {book.title && <h3>{book.title}</h3>}
       {book.author && <p>{book.author}</p>}
       {book.genre && !showNotesInput && <span className="genre-tag">{book.genre}</span>}
-      
+
       {/* Show View link only when NOT selected */}
       {!isSelected && book.title && book.author && book.genre && (
-        <button className="view-link" onClick={() => setShowDetails(true)}>View</button>
+        <div className="card-links">
+          <button className="edit-link" onClick={onSelect}>Edit</button>
+          <button className="view-link" onClick={() => setShowDetails(true)}>View</button>
+        </div>
       )}
 
       {/* Show edit options when selected */}
       {isSelected && (
-        <div className="edit-form">
+        <div className="edit-form" onClick={e => e.stopPropagation()}>
           {!showNotesInput ? (
-            <div className="edit-options">
-              <button className="option-button remove-button" onClick={onDelete}>
-                Remove
-              </button>
-              <button className="option-button notes-button" onClick={() => setShowNotesInput(true)}>
-                <span className="plus-sign">+</span> Notes
-              </button>
-            </div>
+            <>
+              <div className="edit-options">
+                <button className="option-button remove-button" onClick={onDelete}>Remove</button>
+                <button className="option-button notes-button" onClick={() => setShowNotesInput(true)}>
+                  <span className="plus-sign">+</span> Notes
+                </button>
+                <button className="option-button cancel-edit-button" onClick={() => {
+                  // Exit edit mode and deselect book
+                  if (typeof window !== 'undefined') {
+                    const event = new CustomEvent('cancelEditMode');
+                    window.dispatchEvent(event);
+                  }
+                }}>Cancel</button>
+              </div>
+            </>
           ) : (
             createPortal(
               <div className="notes-modal-portal">
                 <div className="notes-backdrop" onClick={() => setShowNotesInput(false)} />
                 <div className="notes-form-container" onClick={(e) => e.stopPropagation()}>
-                  <h3 className="notes-book-title">{book.title}</h3>
-                  <p className="notes-book-author">{book.author}</p>
                   <textarea
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
@@ -111,13 +128,15 @@ const BookCard = ({ book, onDelete, isEditMode, isSelected, hasSelection, onSele
         </div>
       )}
 
-      {showDetails && (
-        <div className="book-details-modal" onClick={() => setShowDetails(false)}>
-          <div className="book-details-content" onClick={(e) => e.stopPropagation()}>
+      {/* Book details modal as portal */}
+      {showDetails && createPortal(
+        <div className="details-modal-portal">
+          <div className="details-backdrop" onClick={() => setShowDetails(false)} />
+          <div className="details-modal-content" onClick={e => e.stopPropagation()}>
             <button className="close-modal" onClick={() => setShowDetails(false)}>×</button>
-            <h2>{book.title}</h2>
-            <p><strong>Author:</strong> {book.author}</p>
-            <p><strong>Genre:</strong> {book.genre}</p>
+            <h2 className="details-title">{book.title}</h2>
+            <p className="details-author"><strong>Author:</strong> {book.author}</p>
+            <p className="details-genre"><strong>Genre:</strong> {book.genre}</p>
             {book.notes && (
               <div className="book-notes">
                 <h3>Notes:</h3>
@@ -125,7 +144,8 @@ const BookCard = ({ book, onDelete, isEditMode, isSelected, hasSelection, onSele
               </div>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

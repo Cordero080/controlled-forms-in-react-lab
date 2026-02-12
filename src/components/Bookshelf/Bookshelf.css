@@ -28,6 +28,116 @@
   letter-spacing: normal;
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* SEARCH BAR STYLES */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 15px;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background: rgba(15, 25, 45, 0.6);
+  border: 1px solid rgba(93, 180, 166, 0.4);
+  border-radius: 25px;
+  color: #E8F4F8;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.search-input::placeholder {
+  color: rgba(232, 244, 248, 0.5);
+  font-family: inherit;
+}
+
+.search-input:focus {
+  border-color: rgba(93, 180, 166, 0.8);
+  box-shadow: 0 0 10px rgba(93, 180, 166, 0.3);
+}
+
+.clear-search {
+  position: absolute;
+  right: 5px;
+  top: 4px;
+  background: rgba(44, 152, 202, 0.282);
+  border: none;
+  color: #e8f4f8b3;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .1px 0 2px 2px;
+  margin: 0;
+}
+
+.clear-search:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* GENRE TABS STYLES */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+.genre-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.genre-tab {
+  padding: 6px 16px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: rgba(15, 25, 45, 0.5);
+  border: 1px solid rgba(93, 180, 166, 0.3);
+  border-radius: 10px;
+  color: rgba(232, 244, 248, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.genre-tab:hover {
+  background: rgba(93, 180, 166, 0.2);
+  border-color: rgba(93, 180, 166, 0.5);
+  color: #E8F4F8;
+}
+
+.genre-tab.active {
+  background: rgba(93, 180, 166, 0.3);
+  border-color: rgba(93, 180, 166, 0.8);
+  color: #E8F4F8;
+  box-shadow: 0 0 10px rgba(93, 180, 166, 0.3);
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: rgba(232, 244, 248, 0.6);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  padding: 40px;
+}
+
 .bookshelfDiv {
   opacity: 1;
   transition: opacity 0.5s ease;
@@ -171,37 +281,23 @@
 
 h1 {
   font-size: 1.65rem;
-  color: #ffb3008f;
-  text-shadow: 0 0 12px rgba(4, 50, 200, 0.908), 0 0 4px rgba(255, 217, 0, 0.891);
+  color: #fbb81bda;
   font-weight: bold;
   text-align: center;
   margin-bottom: 22px;
   margin-top: 150px;
   margin-left: 15px;
-  transition: color 0.5s ease, text-shadow 0.5s ease;
-  animation: float 3s ease-in-out infinite;
+  transition: color 0.5s ease;
 }
 
 h1:hover {
   color: #6A5ACD; /* Change to a mysterious shade of blue */
-  text-shadow: 0 0 20px rgba(106, 90, 205, 0.8), 0 0 40px rgba(106, 90, 205, 0.6); /* Add a glowing effect */
-  transform: scale(1.05); /* Slightly enlarge the text */
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0); /* Start and end at the original position */
-  }
-  50% {
-    transform: translateY(-10px); /* Move up slightly */
-  }
 }
 
 label {
   font-size: 0.9rem; /* Slightly larger font size for emphasis */
   color: #13f8c3b4; /* Soft complementary color */
   font-weight: bold; /* Make the labels bold */
-  text-shadow: 0 0 4px rgba(5, 37, 66, 0.8); /* Subtle glowing effect */
   margin-bottom: 4px; /* Add spacing below the labels */
   display: block; /* Ensure labels are on their own line */
 }
@@ -325,7 +421,6 @@ select:hover::after {
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.9rem;
   margin: 0;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.294);
   font-weight: bold;
   line-height: 1.4;
 }
