@@ -380,8 +380,9 @@
 
 .notes-modal-title {
   color: #E8F4F8;
-  font-family: 'Dune_rise', sans-serif;
+  font-family: 'Rajdhani', sans-serif;
   font-size: 1.5rem;
+  font-weight: 700;
   margin: 0;
 }
 
@@ -389,6 +390,7 @@
   color: rgba(232, 244, 248, 0.7);
   font-family: 'Rajdhani', sans-serif;
   font-size: 1rem;
+  font-weight: 600;
   margin: 5px 0 0 0;
 }
 
