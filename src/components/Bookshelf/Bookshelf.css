@@ -347,37 +347,41 @@ select:hover::after {
   filter: drop-shadow(0 0 4px rgba(255, 179, 0, 0.8));
 }
 
-/* Submit button styling - Ghost style */
+/* Submit button styling - 3D style */
 .submitButton {
   width: 100%;
   padding: 9px 15px;
   margin-top: 11px;
-  background: transparent;
+  background: linear-gradient(180deg, rgba(45, 229, 217, 0.15) 0%, rgba(45, 229, 217, 0.05) 100%);
   border: 2px solid rgba(45, 229, 217, 0.687);
+  border-bottom: 4px solid rgba(30, 180, 170, 0.8);
   border-radius: 6px;
   color: rgba(93, 180, 166, 0.44);
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.85rem;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.15s ease-in-out;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 0 12px rgba(93, 180, 166, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 12px rgba(93, 180, 166, 0.2);
   backdrop-filter: blur(10px);
 }
 
 .submitButton:hover {
-  background: rgba(93, 180, 166, 0.1);
+  background: linear-gradient(180deg, rgba(45, 229, 217, 0.25) 0%, rgba(45, 229, 217, 0.1) 100%);
   border-color: rgba(93, 180, 166, 0.55);
   color: #0587de;
-  transform: translateY(2px);
-  box-shadow: 0 0 2px rgba(11, 154, 130, 0.6), 0 0 50px rgba(93, 180, 166, 0.3);
-  filter: brightness(1.2);
+  transform: translateY(-2px);
+  border-bottom-width: 6px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4), 0 0 25px rgba(11, 154, 130, 0.6);
+  filter: brightness(1.1);
 }
+
 .submitButton:active {
-  transform: translateY(0);
-  box-shadow: 0 0 15px rgba(93, 180, 166, 0.4);
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 10px rgba(93, 180, 166, 0.3);
 }
 
 /* Error popup bubble - positioned absolutely, doesn't take space */

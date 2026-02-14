@@ -108,6 +108,10 @@ const BookCard = ({ book, onDelete, isEditMode, isSelected, hasSelection, onSele
               <div className="notes-modal-portal">
                 <div className="notes-backdrop" onClick={() => setShowNotesInput(false)} />
                 <div className="notes-form-container" onClick={(e) => e.stopPropagation()}>
+                  <div className="notes-modal-header">
+                    <h3 className="notes-modal-title">{book.title}</h3>
+                    <p className="notes-modal-author">by {book.author}</p>
+                  </div>
                   <textarea
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}

@@ -66,23 +66,23 @@ const GeometricBg = () => {
   
   // ⬆️ ENHANCED: More dramatic opacity ranges for visual impact
   const OPACITY_LEVELS = {
-    FORMATION_START: 0.3,        // Start more subtle
-    FORMATION_RANGE: 0.6,        // Increased range for dramatic entrance
-    STABLE: 0.9,                 // More visible when stable
-    DISPERSION_MULTIPLIER: 0.7,  // Fade faster on dispersion
-    CHAOS_BASE: 0.2,             // More ghostly during chaos
-    CHAOS_RANGE: 0.4,
-    ECHO_MULTIPLIER: 0.3,        // NEW: For trail effects
+    FORMATION_START: 0.15,       // Start subtle
+    FORMATION_RANGE: 0.35,       // Range for effect
+    STABLE: 0.50,                // More visible when stable
+    DISPERSION_MULTIPLIER: 0.45, // Fade on dispersion
+    CHAOS_BASE: 0.12,            // Ghostly during chaos
+    CHAOS_RANGE: 0.18,
+    ECHO_MULTIPLIER: 0.15,       // For trail effects
   };
   
   // ⬇️ ENHANCED: Slower, more hypnotic timing
   const TIMING = {
     ANIMATION_INTERVAL: 25,      // Smoother framerate
     TIME_INCREMENT: 0.006,       // Slower, more meditative
-    PULSE_FREQUENCY: 0.5,        // Gentler pulse
+    PULSE_FREQUENCY: 0,          // No pulsing
     ROTATION_SPEED: 2.5,         // Softer rotation
-    CHAOS_X_SPEED: 0.4,          // NEW: Chaos movement speed
-    CHAOS_Y_SPEED: 0.3,          // NEW: Chaos movement speed
+    CHAOS_X_SPEED: 0.4,          // Chaos movement speed
+    CHAOS_Y_SPEED: 0.3,          // Chaos movement speed
   };
   
   // Vanishing points for geometric curves - positioned using golden ratio
@@ -395,7 +395,7 @@ const GeometricBg = () => {
         x1={x} y1={0} x2={x} y2={height}
         stroke="#1E88E5"
         strokeWidth="0.08"
-        opacity="0.12"
+        opacity="0.08"
         strokeDasharray="3 6"
       />
     );
@@ -407,7 +407,7 @@ const GeometricBg = () => {
         x1={0} y1={y} x2={width} y2={y}
         stroke="#1E88E5"
         strokeWidth="0.08"
-        opacity="0.12"
+        opacity="0.08"
         strokeDasharray="3 6"
       />
     );
@@ -456,7 +456,7 @@ const GeometricBg = () => {
           d={`M ${startX} ${startY} Q ${ctrlX} ${ctrlY} ${targetX} ${targetY}`}
           stroke={color}
           strokeWidth={isAccent ? 0.25 : 0.12}
-          opacity={(isAccent ? 0.4 : 0.2) * (1 - progress * 0.3)}
+          opacity={(isAccent ? 0.25 : 0.12) * (1 - progress * 0.3)}
           fill="none"
           strokeDasharray={i % 3 === 0 ? '.5 3' : 'none'}
           strokeLinecap="round"
@@ -474,7 +474,7 @@ const GeometricBg = () => {
     const x = baseX + Math.sin(time * 0.15 + i) * 1.5;
     const y = baseY + Math.cos(time * 0.2 + i) * 1.5;
     const size = 0.12 + Math.sin(time * 1.5 + i) * 0.06;
-    const opacity = .55 + Math.sin(time * 0.8 + i * 0.5) * 0.15;
+    const opacity = .35 + Math.sin(time * 0.8 + i * 0.5) * 0.10;
     
     fieldParticles.push(
       <circle
@@ -513,7 +513,7 @@ const GeometricBg = () => {
           d={`M ${l1.x} ${l1.y} Q ${ctrlX} ${ctrlY} ${l2.x} ${l2.y}`}
           stroke={l1.color}
           strokeWidth={0.2}
-          opacity={0.4 * l1.opacity}
+          opacity={0.25 * l1.opacity}
           fill="none"
           strokeDasharray="0.5 1"
           filter="url(#glow)"
@@ -545,7 +545,7 @@ const GeometricBg = () => {
             d={`M ${l1.x} ${l1.y} Q ${ctrlX} ${ctrlY} ${l2.x} ${l2.y}`}
             stroke={l1.color}
             strokeWidth={0.06}
-            opacity={0.12 * strength}
+            opacity={0.08 * strength}
             fill="none"
             strokeDasharray="0.5 2"
           />
