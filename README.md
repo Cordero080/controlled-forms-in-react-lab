@@ -36,44 +36,48 @@ The app comes in three visual themes:
 
 ### 🖤 Black & White Theme
 
-| Home | Bookshelf | Add Book |
-|------|-----------|----------|
+| Home                                         | Bookshelf                                         | Add Book                                        |
+| -------------------------------------------- | ------------------------------------------------- | ----------------------------------------------- |
 | ![Home BNW](./screenshots/home-page-bnw.png) | ![Bookshelf BNW](./screenshots/bookshelf-bnw.png) | ![Add Book BNW](./screenshots/add-book-bnw.png) |
 
-| Search | Add Notes | View |
-|--------|-----------|------|
-| ![Search BNW](./screenshots/search-bnw.png) | ![Add Notes BNW](./screenshots/add-notes-bnw.png) | ![View BNW](./screenshots/view-bnw.png) |
+| Search                                      | Edit                                    | View                                    |
+| ------------------------------------------- | --------------------------------------- | --------------------------------------- |
+| ![Search BNW](./screenshots/search-bnw.png) | ![Edit BNW](./screenshots/edit-bnw.png) | ![View BNW](./screenshots/view-bnw.png) |
+
+| Add Notes                                         | No Matches                                          |
+| ------------------------------------------------- | --------------------------------------------------- |
+| ![Add Notes BNW](./screenshots/add-notes-bnw.png) | ![No Matches BNW](./screenshots/no-matches-bnw.png) |
 
 ---
 
 ### 🌊 Color Theme (Default)
 
-| Home | Bookshelf | Add Book |
-|------|-----------|----------|
+| Home                                        | Bookshelf                                             | Add Book                                            |
+| ------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------- |
 | ![Home Color](./screenshots/home-color.png) | ![Bookshelf Color](./screenshots/bookshelf-color.png) | ![Add Book Color](./screenshots/add-book-color.png) |
 
-| Search | Edit | View |
-|--------|------|------|
+| Search                                          | Edit                                        | View                                        |
+| ----------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
 | ![Search Color](./screenshots/search-color.png) | ![Edit Color](./screenshots/edit-color.png) | ![View Color](./screenshots/view-color.png) |
 
-| No Matches |
-|------------|
+| No Matches                                              |
+| ------------------------------------------------------- |
 | ![No Matches Color](./screenshots/no-matches-color.png) |
 
 ---
 
 ### ☀️ Light Mode Theme
 
-| Home | Bookshelf | Add Book |
-|------|-----------|----------|
+| Home                                        | Bookshelf                                             | Add Book                                            |
+| ------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------- |
 | ![Home Light](./screenshots/home-light.png) | ![Bookshelf Light](./screenshots/bookshelf-light.png) | ![Add Book Light](./screenshots/add-book-light.png) |
 
-| Add Notes | Edit | View |
-|-----------|------|------|
+| Add Notes                                             | Edit                                        | View                                        |
+| ----------------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
 | ![Add Notes Light](./screenshots/add-notes-light.png) | ![Edit Light](./screenshots/edit-light.png) | ![View Light](./screenshots/view-light.png) |
 
-| No Matches |
-|------------|
+| No Matches                                              |
+| ------------------------------------------------------- |
 | ![No Matches Light](./screenshots/no-matches-light.png) |
 
 ---
