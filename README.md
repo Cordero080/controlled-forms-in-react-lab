@@ -1,4 +1,5 @@
 <div align="center">
+
 # 📚 Quantum Literary Bookshelf
 
 > A React bookshelf application featuring an animated quantum particle system where words decompose, transform, and recombine - visualizing language as living consciousness.
@@ -31,46 +32,51 @@ Evolved into: An exploration of quantum physics visualization, advanced React pa
 
 ## 📸 Screenshots
 
-### Main Interface
+The app comes in three visual themes:
 
-![Bookshelf View](./screenshots/bookshelf-view.png)
-_The main bookshelf displaying book cards with the animated background_
+### 🖤 Black & White Theme
 
-### Homepage Collapsed View
+| Home | Bookshelf | Add Book |
+|------|-----------|----------|
+| ![Home BNW](./screenshots/home-page-bnw.png) | ![Bookshelf BNW](./screenshots/bookshelf-bnw.png) | ![Add Book BNW](./screenshots/add-book-bnw.png) |
 
-![Bookshelf View](./screenshots/home-page.png)
-_The main bookshelf displaying book cards with the animated background_
+| Search | Add Notes | View |
+|--------|-----------|------|
+| ![Search BNW](./screenshots/search-bnw.png) | ![Add Notes BNW](./screenshots/add-notes-bnw.png) | ![View BNW](./screenshots/view-bnw.png) |
 
-### Add Book Form
+---
 
-![Form Interface](./screenshots/add-book-form.png)
-_Collapsible form for adding new books to the collection_
+### 🌊 Color Theme (Default)
 
-### Expanded View
+| Home | Bookshelf | Add Book |
+|------|-----------|----------|
+| ![Home Color](./screenshots/home-color.png) | ![Bookshelf Color](./screenshots/bookshelf-color.png) | ![Add Book Color](./screenshots/add-book-color.png) |
 
-![Expanded Cards](./screenshots/expanded-view.png)
-_Expanded grid view with larger book cards_
+| Search | Edit | View |
+|--------|------|------|
+| ![Search Color](./screenshots/search-color.png) | ![Edit Color](./screenshots/edit-color.png) | ![View Color](./screenshots/view-color.png) |
 
-### Notes
+| No Matches |
+|------------|
+| ![No Matches Color](./screenshots/no-matches-color.png) |
 
-![Add Notes](./screenshots/notes.png)
+---
 
-_Modal pop-up to add notes_
+### ☀️ Light Mode Theme
 
-### View
+| Home | Bookshelf | Add Book |
+|------|-----------|----------|
+| ![Home Light](./screenshots/home-light.png) | ![Bookshelf Light](./screenshots/bookshelf-light.png) | ![Add Book Light](./screenshots/add-book-light.png) |
 
-![Add Notes](./screenshots/view.png)
-_Modal pop-up to view notes_
+| Add Notes | Edit | View |
+|-----------|------|------|
+| ![Add Notes Light](./screenshots/add-notes-light.png) | ![Edit Light](./screenshots/edit-light.png) | ![View Light](./screenshots/view-light.png) |
 
-### Edit
+| No Matches |
+|------------|
+| ![No Matches Light](./screenshots/no-matches-light.png) |
 
-![Add Notes](./screenshots/edit.png)
-_Card borders are highlighted when editing notes_
-
-### Remove or Delete
-
-![Add Notes](./screenshots/remove.png)
-_Removal of item in bookshelf_
+---
 
 ## ✨ Key Features
 
