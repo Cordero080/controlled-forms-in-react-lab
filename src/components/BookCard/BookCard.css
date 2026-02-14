@@ -1,3 +1,44 @@
+/* Custom Scrollbar Styles - Thin & Theme-Matched */
+/* For Chrome, Safari, Edge */
+.details-modal-content::-webkit-scrollbar,
+.notes-form-container::-webkit-scrollbar,
+.notes-input::-webkit-scrollbar,
+.book-notes::-webkit-scrollbar {
+  width: 6px;
+}
+
+.details-modal-content::-webkit-scrollbar-track,
+.notes-form-container::-webkit-scrollbar-track,
+.notes-input::-webkit-scrollbar-track,
+.book-notes::-webkit-scrollbar-track {
+  background: rgba(15, 30, 55, 0.3);
+  border-radius: 3px;
+}
+
+.details-modal-content::-webkit-scrollbar-thumb,
+.notes-form-container::-webkit-scrollbar-thumb,
+.notes-input::-webkit-scrollbar-thumb,
+.book-notes::-webkit-scrollbar-thumb {
+  background: rgba(93, 180, 166, 0.5);
+  border-radius: 3px;
+}
+
+.details-modal-content::-webkit-scrollbar-thumb:hover,
+.notes-form-container::-webkit-scrollbar-thumb:hover,
+.notes-input::-webkit-scrollbar-thumb:hover,
+.book-notes::-webkit-scrollbar-thumb:hover {
+  background: rgba(93, 180, 166, 0.8);
+}
+
+/* For Firefox */
+.details-modal-content,
+.notes-form-container,
+.notes-input,
+.book-notes {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(93, 180, 166, 0.5) rgba(15, 30, 55, 0.3);
+}
+
 .edit-header {
   display: flex;
   flex-direction: column;
@@ -104,6 +145,8 @@
   padding: 40px 36px;
   max-width: 850px;
   width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
   color: #E8F4F8;
   font-family: 'Rajdhani', sans-serif;
   box-shadow: 0 6px 40px rgba(0, 191, 255, 0.25);
@@ -366,6 +409,8 @@
   padding: 30px;
   width: 90%;
   max-width: 700px;
+  max-height: 85vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -414,6 +459,8 @@
   width: 100%;
   resize: vertical;
   min-height: 250px;
+  max-height: 50vh;
+  overflow-y: auto !important;
   text-align: left;
   font-size: 1rem !important;
 }
@@ -512,6 +559,9 @@
   margin-top: 6px;
   padding-top: 6px;
   border-top: 1px solid rgba(93, 180, 166, 0.3);
+  width: 100%;
+  max-height: 50vh;
+  overflow-y: auto;
 }
 
 .notes-preview {

@@ -54,6 +54,11 @@ const BookCard = ({ book, onDelete, isEditMode, isSelected, hasSelection, onSele
       notes: notes
     });
     setShowNotesInput(false);
+    // Exit edit mode after saving - cleaner UX
+    if (typeof window !== 'undefined') {
+      const event = new CustomEvent('cancelEditMode');
+      window.dispatchEvent(event);
+    }
   };
 
   // Determine the CSS class based on state
